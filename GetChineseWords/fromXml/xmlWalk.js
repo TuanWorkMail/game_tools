@@ -38,6 +38,7 @@ function walkAllChildNode(result, callback) {
                     // walk into child node
                     for (var childNode in node) {
                         if (node.hasOwnProperty(childNode)) {
+
                             if (childNode !== '$' && typeof node[childNode] === 'object') {
                                 walkAllChildNode(node, callback);
                             }

@@ -12,10 +12,10 @@ exports._walk = function(dirPath, extension, callback) {
                 return file.substr(-extension.length) === extension;
 
             }).forEach(function (file) {
-                fs.readFile(file, 'utf-8', function (err, contents) {
-                    if(err) console.log(err);
 
-                    else callback(contents, file);
+                readFile(file, function callback2(contents){
+
+                    callback(contents, file);
                 })
             })
         }
@@ -47,6 +47,15 @@ function walk(dir, done) {
         });
     });
 }
+
+function readFile(path, callback){
+    fs.readFile(path, 'utf-8', function (err, contents) {
+        if(err) console.log(err);
+
+        else callback(contents);
+    })
+}
+exports.readFile = readFile;
 
 //walk(dirPath, function (err, files) {
 //

@@ -25,7 +25,12 @@ var chineseFiles = [],
     characterCount = 0,
     fileCount = 0;
 
-var walkFile = require('./fileWalk')._walk,
+var alreadyReadFile = false,
+    vietnameseFiles = [];
+
+var fileWalk = require('./fileWalk'),
+    walkFile = fileWalk._walk,
+    readFile = fileWalk.readFile,
     walkXml = require('./xmlWalk').walkXml;
 
 walkFile(dirPath, extension, function(contents, file){
@@ -39,31 +44,62 @@ walkFile(dirPath, extension, function(contents, file){
 
             checkChinese(word, function callback2(){
 
-                if(characterCount > 12000){
+                if(config.getWordMode){
 
-                    createFile();
-                    characterCount = 0;
-                }
+                    if(characterCount > config.characterLimit){
 
-                if(firstChineseOfFile){
+                        createFile();
+                        characterCount = 0;
+                    }
 
-                    var shortPath = file.replace(dirPath, '');
-                    chineseFiles.push(new ChineseFile(shortPath));
+                    if(firstChineseOfFile){
 
-                    var _string = shortPath + '\n';
+                        var shortPath = file.replace(dirPath, '');
+                        chineseFiles.push(new File(shortPath));
+
+                        var _string = shortPath + '\n';
+                        characterCount += _string.length;
+                        string += _string;
+
+                        firstChineseOfFile = false;
+                    }
+
+//                util.debug(JSON.stringify(chineseFiles));
+//                chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
+
+                    _string = wordCount + '\nw":"' + word + '"\n';
+
                     characterCount += _string.length;
                     string += _string;
 
-                    firstChineseOfFile = false;
+                }else{  //put word mode on
+
+                    // read file only once
+                    if(!alreadyReadFile){
+
+                        readFile(config.filePath, function (contents) {
+
+                            var lines = contents.split('\n');
+
+                            lines.forEach(function callback(line){
+                                var entries = line.split('\t');
+
+                                if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
+                                    vietnameseFiles.push(new File(entries[0]));
+                                }
+                                vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: entries[2]});
+                            });
+
+                            util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
+
+                        });
+
+                        alreadyReadFile = true;
+                    }
+
+
+
                 }
-
-//                util.debug(JSON.stringify(chineseFiles));
-//                chineseFiles[chineseFiles.length - 1].chineseWords.push({i: wordCount, w: escapeHtml(word)});
-
-                _string = wordCount + '\nw":"' + word + '\n';
-
-                characterCount += _string.length;
-                string += _string;
             });
         });
     });
@@ -109,11 +145,11 @@ io.on('connection', function (socket) {
 });
 
 
-function ChineseFile(path) {
-    var chineseWords = [];
+function File(path) {
+    var Words = [];
     return {
         path: path,
-        chineseWords: chineseWords
+        Words: Words
     }
 }
 
