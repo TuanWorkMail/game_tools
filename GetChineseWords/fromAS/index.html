@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="output">aloha</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('chat message', function(msg){
+        var chineseFiles = JSON.parse(msg.chineseFiles);
+
+        var html = '<table><tbody>';
+
+        for (var i = 0; i < chineseFiles.length; i++) {
+            var file = chineseFiles[i];
+
+            for (var j = 0; j < file.chineseWords.length; j++) {
+                var word = file.chineseWords[j];
+
+                html += '<tr><td>' + file.path + '</td><td>' + word.index + '</td><td>' + word.word + '</td></tr>';
+            }
+        }
+        html += '</tbody></table>';
+        document.getElementById('output').innerHTML = html;
+    });
+</script>
+</body>
+</html>

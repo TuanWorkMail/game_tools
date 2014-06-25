@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        table
+        {
+            border-collapse:collapse;
+        }
+        table, th, td
+        {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+lưu ý chỉnh % có thể ảnh hưởng nhiều item và nhiều quái vì: 1 DropConfig, rewardNo chỉ đến nhiều quái, serialNums chứa nhiều item<br/>
+<input type="button" value="output JSON" onclick="outputJson()"><br/><br/>
+<table id="dropTable" style="border: solid 1px">
+    <thead>
+    <tr>
+        <th>PropName</th>
+        <th>Quality</th>
+        <th>%</th>
+        <th>MonsterName</th>
+        <th>Level</th>
+        <th>HP</th>
+        <th>new %</th>
+        <th>saved</th>
+    </tr>
+    </thead>
+    <tbody id="dropBody">
+    </tbody>
+</table>
+
+<script type="application/ecmascript" async src="FileSaver.js"></script>
+<script src="jquery-1.10.2.js"></script>
+<script src="gs_sortable.js"></script>
+<script>
+    sortTable('initialize');
+
+    var prop_drop = [],
+            monster_drop = [],
+            DropConfig;
+
+    (function(){
+        readJson('../xml_db/PropsConfig.xml', function(data){
+            readJson('../xml_db/DropConfig.xml', function(data2){
+                readJson('../xml_db/MonsterFightConfig.xml', function(data3){
+                    listProp(data2);
+                    getPropDetail(data);
+                    removeNoNameProp();
+
+                    listMonster(data3);
+                    combineDropMonster();
+                    removeNoMonsterProp();
+
+                    dropToTable();
+
+                    DropConfig = data2;
+                    console.log(prop_drop)
+                })
+            });
+        });
+    })();
+
+    function listProp(DropConfig){
+
+        $.each(DropConfig, function (key, value) {
+
+            var dropDetail = {rewardNo: value.rewardNo, rate: value.rate, fullValue: value.fullValue, realDropId: value.id};
+
+            // check undefined, continue loop
+            if(!value.serialNums) return true;
+
+            var split = value.serialNums;
+            var split2 = split.split('|');
+            $.each(split2, function (key, value2) {
+                var propId = value2.split('_')[0];
+
+                // initialize prop_drop
+                if(prop_drop.length < 1) {
+                    prop_drop.push({propId: propId, drops: [dropDetail]});
+
+                    // continue loop
+                    return true;
+                }
+                var prop_drop_length = $(prop_drop).length;
+                $.each(prop_drop, function (key, value3) {
+
+                    // check match
+                    if(value3.propId == propId){
+
+                        for (var i = 0; i < value3.drops.length; i++) {
+
+                            // if existed, break
+//                            if(value3.drops[i].rewardNo == value.rewardNo) break;
+
+                            // if not existed, add new
+                            if(i == value3.drops.length - 1) value3.drops.push(dropDetail);
+                        }
+                        // break loop
+                        return false;
+                    }
+                    // if found no match, add new
+                    if(key == prop_drop_length - 1){
+                        prop_drop.push({propId: propId, drops: [dropDetail]});
+                    }
+                })
+            });
+        });
+    }
+
+
+    function listMonster(MonsterConfig){
+
+        $.each(MonsterConfig, function (key, value) {
+
+            // check undefined, continue loop
+            if(!value.drop) return true;
+
+            var split = value.drop;
+            var split2 = split.split('|');
+            $.each(split2, function (key, value2) {
+                var rewardNo = value2.split('_')[0];
+
+                var monsterDetail = {name: value.name, level: value.level, hp: value.hp};
+
+                // initialize monster_drop
+                if(monster_drop.length < 1) {
+                    monster_drop.push({rewardNo: rewardNo, monsters: [monsterDetail]});
+
+                    // continue loop
+                    return true;
+                }
+
+                var monster_drop_length = $(monster_drop).length;
+                $.each(monster_drop, function (key, value3) {
+
+                    // check match
+                    if(value3.rewardNo == rewardNo){
+
+                        for (var i = 0; i < value3.monsters.length; i++) {
+
+                            // if existed, break
+                            if(value3.monsters[i].name == value.name) break;
+
+                            // if not existed, add new
+                            if(i == value3.monsters.length - 1) value3.monsters.push(monsterDetail);
+                        }
+                        // break loop
+                        return false;
+                    }
+                    // if found no match, add new
+                    if(key == monster_drop_length - 1){
+                        monster_drop.push({rewardNo: rewardNo, monsters: [monsterDetail]});
+                    }
+                })
+            });
+        });
+    }
+
+    function getPropDetail(PropsConfig){
+        $.each(prop_drop, function (i, prop_drop) {
+            $.each(PropsConfig, function (j, PropsConfig) {
+
+                if(prop_drop.propId == PropsConfig.id){
+
+                    prop_drop.name = PropsConfig.name;
+                    prop_drop.quality = PropsConfig.quality;
+
+                    // break loop
+                    return false;
+                }
+            })
+        });
+    }
+
+    function removeNoNameProp(){
+        for (var i = 0; i < prop_drop.length; i++) {
+            if(!prop_drop[i].name){
+                prop_drop.splice(i, 1);
+                i--;
+            }
+        }
+    }
+
+    function combineDropMonster(){
+        for (var i = 0; i < prop_drop.length; i++) {
+
+            for (var j = 0; j < monster_drop.length; j++) {
+                for (var k = 0; k < prop_drop[i].drops.length; k++) {
+
+                    if(prop_drop[i].drops[k].rewardNo == monster_drop[j].rewardNo){
+
+                        prop_drop[i].drops[k].monsters = monster_drop[j].monsters;
+                    }
+                }
+            }
+        }
+    }
+
+    function removeNoMonsterProp(){
+        for (var i = 0; i < prop_drop.length; i++) {
+            for (var j = 0; j < prop_drop[i].drops.length; j++) {
+
+                if(!prop_drop[i].drops[j].monsters){
+                    prop_drop[i].drops.splice(j, 1);
+                    j--;
+                }
+            }
+        }
+    }
+
+    function dropToTable() {
+        var html = '',
+                No = 0;
+        $.each(prop_drop, function (i, prop_drop) {
+            $.each(prop_drop.drops, function (j, drop) {
+                $.each(drop.monsters, function (k, monster) {
+
+                    var rate = drop.rate / drop.fullValue * 100,
+                            rateRounded = rate.toFixed(2),
+                            color;
+
+                    switch (prop_drop.quality){
+                        case '1':
+                            color = 'green';
+                            break;
+                        case '2':
+                            color = 'blue';
+                            break;
+                        case '3':
+                            color = 'purple';
+                            break;
+                        case '4':
+                            color = 'orange';
+                            break;
+                        case '5':
+                            color = 'red';
+                            break;
+                        default :
+                            var name = prop_drop.name;
+                    }
+                    if(!name) name = '<span style="color: '+color+';">'+prop_drop.name+'</span>';
+
+                    var lv = monster.level;
+
+                    if(lv <= 20) var monsterName = monster.name;
+                    else if(lv <= 40) color = 'green';
+                    else if(lv <= 60) color = 'blue';
+                    else if(lv <= 80) color = 'purple';
+                    else if(lv <= 100) color = 'orange';
+                    else color = 'red';
+
+                    if(!monsterName) monsterName = '<span style="color: '+color+';">'+monster.name+'</span>';
+
+                    html += '<tr>' +
+                            '<td>'+name+'</td>' +
+                            '<td>'+prop_drop.quality+'</td>' +
+                            '<td>'+rateRounded+'</td>' +
+                            '<td>'+monsterName+'</td>' +
+                            '<td>'+monster.level+'</td>' +
+                            '<td>'+monster.hp+'</td>' +
+                            '<td><input type="text" style="width: 25px" id="row_'+No+'" onblur="saveRate(this,'+drop.realDropId+')"></td>' +
+                            '<td><span style="color: red;" class="id_'+drop.realDropId+'" id="status_'+No+'"></span></td>' +
+                            '</tr>';
+                    No++;
+                })
+            })
+        });
+        $('#dropBody').html(html);
+
+        sortTable();
+    }
+
+    function saveRate(that, realDropId){
+
+        // remove 'id_'
+        var split = that.id;
+        var id = split.split('_')[1];
+
+        // trim so that space is not treated as zero
+        that.value = that.value.trim();
+
+        if(0 <= that.value && that.value <= 100 && that.value != ''){
+            $.each(DropConfig, function (i, dropConfig) {
+                if(dropConfig.id == realDropId){
+
+                    dropConfig.rate = Math.round(that.value / 100 * dropConfig.fullValue);
+                    $('.id_'+realDropId).html(dropConfig.rate);
+
+                    // break loop
+                    return false;
+                }
+            });
+        } else {
+            $('#status_'+id).html('NaN');
+        }
+    }
+
+    function outputJson() {
+        var html = '[{\n';
+
+        for (var j = 0; j < DropConfig.length; j++) {
+
+            var first = true;
+
+            for (key2 in DropConfig[j]) {
+                if (DropConfig[j].hasOwnProperty(key2)) {
+
+                    if (first) {
+                        first = false;
+                        html += '"' + key2 + '":"' + DropConfig[j][key2] + '"';
+                    } else {
+                        html += ',\n"' + key2 + '":"' + DropConfig[j][key2] + '"';
+                    }
+                }
+            }
+
+            if (j < DropConfig.length - 1) html += '\n' + '},{' + '\n';
+            else html += '\n' + '}]';
+        }
+
+//        $('body').html(html);
+
+        var blob = new Blob([html], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "DropConfig.xml");
+    }
+
+    function readJson(url, callback){
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function (data) {
+                callback(data);
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    }
+
+    var TSort_Data;
+    var TSort_Cookie;
+    var TSort_Initial;
+    function sortTable(mode){
+        TSort_Data = ['dropTable', 's', 'i', 'i', 's', 'i', 'i'];
+//        TSort_Cookie = 'dropTable';
+//        TSort_Initial = ['1D', '2D'];
+        tsRegister();
+        if(mode != 'initialize'){
+            tsSetTable ('dropTable');
+            tsInit();
+        }
+    }
+
+</script>
+
+</body>
+</html>

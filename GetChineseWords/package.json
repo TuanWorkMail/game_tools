@@ -4,6 +4,7 @@
     "dependencies" :
     {
         "socket.io" : ">=0.9.16",
-        "express" : ">=3.4.8"
+        "express" : ">=3.4.8",
+        "xml2js" : ">=0.4.1"
     }
 }

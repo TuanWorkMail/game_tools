@@ -1,2 +1,2 @@
-supervisor -w js,main.js main.js
+supervisor -w fromXml,fromAS,main.js main.js
 pause
