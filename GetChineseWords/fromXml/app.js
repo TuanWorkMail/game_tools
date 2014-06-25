@@ -79,7 +79,9 @@ walkFile(dirPath, extension, function(contents, file){
 
                         readFile(config.filePath, function (contents) {
 
-                            var lines = contents.split('\n');
+                            var _contents = contents.replace('\r', '');
+
+                            var lines = _contents.split('\n');
 
                             lines.forEach(function callback(line){
                                 var entries = line.split('\t');
@@ -90,19 +92,17 @@ walkFile(dirPath, extension, function(contents, file){
                                 vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: entries[2]});
                             });
 
-                            util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
+//                            util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
 
                         });
 
                         alreadyReadFile = true;
                     }
-
-
-
                 }
             });
         });
     });
+    xmlParser.reset();
 });
 
 
