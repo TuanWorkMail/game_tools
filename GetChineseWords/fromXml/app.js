@@ -1,7 +1,8 @@
 var config = require('./config'),
     dirPath = config.dirPath,
     extension = config.extension,
-    xmlParser = require('xml2js').Parser(),
+    xml2js = require('xml2js'),
+    xmlParser = xml2js.Parser(),
     escapeHtml = require('./escapeHtml').escapeHtml,
     util = require('util');
 
@@ -33,102 +34,152 @@ var fileWalk = require('./fileWalk'),
     readFile = fileWalk.readFile,
     walkXml = require('./xmlWalk').walkXml;
 
-walkFile(dirPath, extension, function(contents, file){
+// read file only once
+if(!config.getWordMode){
 
-    wordCount = 0;
-    var firstChineseOfFile = true;
+    readFile(config.filePath, function (contents) {
 
-    xmlParser.parseString(contents, function (err, result) {
+//        var _contents = contents.replace('\r\n', '\n').replace('\r','');
+        var _contents = contents;
 
-        walkXml(result, function callback(word){
+        var lines = _contents.split('\n');
 
-            // if end of xml file, write file to disk
-            if(word === 'EoF_EoF'){
-                
+        lines.forEach(function callback(line){
+            var entries = line.split('\t');
+
+            if(entries.length !== 3) util.debug('length !== 3');
+
+            // if array is empty OR if current path is different from the last path
+            if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
+                vietnameseFiles.push(new File(entries[0]));
+            }
+            if(typeof entries[2] !== 'undefined') {
+                var word = entries[2],
+                    word2 = word.replace('\r', '').replace('\"', '');
+            } else {
+                word2 = entries[2];
             }
 
-            checkChinese(word, function callback2(){
+            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: word2});
+        });
 
-                if(config.getWordMode){
+//        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
 
-                    if(characterCount > config.characterLimit){
+        main();
+    });
 
-                        createFile();
-                        characterCount = 0;
-                    }
+    alreadyReadFile = true;
+} else main();
 
-                    if(firstChineseOfFile){
+function main() {
 
-                        var shortPath = file.replace(dirPath, '');
-                        chineseFiles.push(new File(shortPath));
+    walkFile(dirPath, extension, function (contents, file) {
 
-                        var _string = shortPath + '\n';
-                        characterCount += _string.length;
-                        string += _string;
+        wordCount = 0;
+        var firstChineseOfFile = true;
 
-                        firstChineseOfFile = false;
-                    }
+        xmlParser.parseString(contents, function (err, result) {
+
+            walkXml(result, function callback(word, object, property) {
+
+                // if end of xml file, write file to disk
+                if (word === 'EoF_EoF') {
+
+                    var builder = new xml2js.Builder();
+                    var xml = builder.buildObject(result);
+//                    util.debug(xml);
+
+                    createFile(dirPath+'_output'+getShortPath(file), xml);
+                }
+
+                // for every word found in xml, check if chinese
+                checkChinese(word, function callback2() {
+
+                    // extract mode
+                    if (config.getWordMode) {
+
+                        if (characterCount > config.characterLimit) {
+
+                            createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+                            fileCount++;
+                            string = '';
+                            chineseFiles = [];
+
+                            characterCount = 0;
+                        }
+
+                        if (firstChineseOfFile) {
+
+                            var shortPath = getShortPath(file);
+                            chineseFiles.push(new File(shortPath));
+
+                            var _string = shortPath + '\n';
+                            characterCount += _string.length;
+                            string += _string;
+
+                            firstChineseOfFile = false;
+                        }
 
 //                util.debug(JSON.stringify(chineseFiles));
 //                chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
 
-                    _string = wordCount + '\nw":"' + word + '"\n';
+                        _string = wordCount + '\nw":"' + word + '"\n';
 
-                    characterCount += _string.length;
-                    string += _string;
+                        characterCount += _string.length;
+                        string += _string;
 
-                }else{  //put word mode on
+                    } else {  //put word mode on
 
-                    // read file only once
-                    if(!alreadyReadFile){
 
-                        readFile(config.filePath, function (contents) {
-
-//                            var _contents = contents.replace('\r', '');
-
-                            var lines = contents.split('\n');
-
-                            lines.forEach(function callback(line){
-                                var entries = line.split('\t');
-
-                                if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
-                                    vietnameseFiles.push(new File(entries[0]));
-                                }
-                                vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: entries[2].replace('\r', '')});
-                            });
-
-//                            util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
-
-                        });
-
-                        alreadyReadFile = true;
-                    }
-                    for (var i = 0; i < vietnameseFiles.length; i++) {
-                        var vietnameseFile = vietnameseFiles[i];
                         var fileFound = false,
                             wordFound = false;
 
-                        if(vietnameseFile.path === file){
+                        // loop vietnamese words
+                        for (var i = 0; i < vietnameseFiles.length; i++) {
+                            var vietnameseFile = vietnameseFiles[i];
 
-                            for (var j = 0; j < vietnameseFile.Words.length; j++) {
-                                var _word = vietnameseFile.Words[j];
+                            // get words from the same file path
+                            if (vietnameseFile.path === getShortPath(file)) {
 
-                                if(_word === word){
+//                                util.debug(vietnameseFile.path + ' === ' + getShortPath(file));
 
+                                for (var j = 0; j < vietnameseFile.Words.length; j++) {
+                                    var _word = vietnameseFile.Words[j];
+
+//                                    util.debug(_word.i +'!=='+ wordCount);
+
+                                    // check word position
+                                    if (_word.i == wordCount) {
+
+                                        // replace chinese in xml with vietnamese from txt file
+                                        object[property] = _word.w;
+1
+                                        wordFound = true;
+                                        break;
+                                    }
                                 }
+                                fileFound = true;
+                                break;
                             }
-                            fileFound = true;
-                            break;
+                            if (fileFound) {
+                                util.debug('file found, breaking....');
+                                break;
+                            }
                         }
+//                    if(!fileFound) util.debug('cannot find file: '+getShortPath(file));
                     }
-                    if(!fileFound) util.debug('cannot find file: '+file);
-                }
+                });
             });
         });
+        xmlParser.reset();
     });
-    xmlParser.reset();
-});
 
+}
+
+function getShortPath(path){
+    return path.replace(dirPath, '');
+}
 
 function checkChinese(word, callback) {
 
@@ -142,23 +193,17 @@ function checkChinese(word, callback) {
     if (word.toString().match('`')) console.log(word);
 }
 
-function createFile(){
-    var content = '';
-//    content = JSON.stringify(chineseFiles, undefined, 2);
-    content = string;
+function createFile(path, content){
 
-    fs.writeFile("D:\\json\\json"+fileCount+".txt", content, function(err) {
+//    content = JSON.stringify(chineseFiles, undefined, 2);
+
+    fs.writeFile(path, content, function(err) {
         if(err) {
             console.log(err);
         } else {
-            console.log("The file json"+fileCount+".txt was saved!");
+            util.log("The file "+path+" was saved!");
         }
     });
-
-    fileCount++;
-
-    string = '';
-    chineseFiles = [];
 }
 
 io.on('connection', function (socket) {
@@ -167,7 +212,6 @@ io.on('connection', function (socket) {
 
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
 });
-
 
 function File(path) {
     var Words = [];

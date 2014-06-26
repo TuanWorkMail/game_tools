@@ -1,5 +1,5 @@
 exports.dirPath = 'D:\\config';
-exports.filePath = 'D:\\config2.txt';
+exports.filePath = 'D:\\config-utf8.txt';
 exports.extension = '.xml';
 exports.mode = 'excel';
 exports.getWordMode = false;
