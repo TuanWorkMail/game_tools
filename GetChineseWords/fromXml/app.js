@@ -94,8 +94,12 @@ function main() {
                     createFile(dirPath+'_output'+getShortPath(file), xml2);
                 }
 
+                var isChinese = false;
+
                 // for every word found in xml, check if chinese
                 checkChinese(word, function callback2() {
+
+                    isChinese = true;
 
                     // extract mode
                     if (config.getWordMode) {
@@ -180,6 +184,11 @@ function main() {
 //                    if(!fileFound) util.debug('cannot find file: '+getShortPath(file));
                     }
                 });
+                if(!isChinese){
+                    if(type === 'content'){
+                        object[property] = '<![CDATA['+word+']]>';
+                    }
+                }
             });
         });
         xmlParser.reset();

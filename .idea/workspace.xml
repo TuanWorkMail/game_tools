@@ -4,7 +4,6 @@
     <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" />
     </list>
     <ignored path="game-script.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +39,8 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7590862" vertical-offset="1989" max-vertical-offset="4080">
-              <caret line="160" column="103" selection-start-line="160" selection-start-column="103" selection-end-line="160" selection-end-column="103" />
+            <state vertical-scroll-proportion="0.3509865" vertical-offset="2841" max-vertical-offset="4233">
+              <caret line="187" column="43" selection-start-line="187" selection-start-column="43" selection-end-line="187" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -357,7 +356,15 @@
       <created>1403777289326</created>
       <updated>1403777289326</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="only wrap CDATA around content , not ATTRIBUTE">
+      <created>1403777846140</created>
+      <updated>1403777846140</updated>
+    </task>
+    <task id="LOCAL-00008" summary="must remove all quote [&quot;] because attribute use quote to wrap">
+      <created>1403778618272</created>
+      <updated>1403778618272</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -405,7 +412,9 @@
     <MESSAGE value="i really need to check out more :(" />
     <MESSAGE value="done, now need refactor&#10;" />
     <MESSAGE value="filter out the &quot;#N/A&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="filter out the &quot;#N/A&quot;" />
+    <MESSAGE value="only wrap CDATA around content , not ATTRIBUTE" />
+    <MESSAGE value="must remove all quote [&quot;] because attribute use quote to wrap" />
+    <option name="LAST_COMMIT_MESSAGE" value="must remove all quote [&quot;] because attribute use quote to wrap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -780,8 +789,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7590862" vertical-offset="1989" max-vertical-offset="4080">
-          <caret line="160" column="103" selection-start-line="160" selection-start-column="103" selection-end-line="160" selection-end-column="103" />
+        <state vertical-scroll-proportion="0.3509865" vertical-offset="2841" max-vertical-offset="4233">
+          <caret line="187" column="43" selection-start-line="187" selection-start-column="43" selection-end-line="187" selection-end-column="43" />
           <folding />
         </state>
       </provider>
