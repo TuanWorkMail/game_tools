@@ -42,6 +42,11 @@ walkFile(dirPath, extension, function(contents, file){
 
         walkXml(result, function callback(word){
 
+            // if end of xml file, write file to disk
+            if(word === 'EoF_EoF'){
+                
+            }
+
             checkChinese(word, function callback2(){
 
                 if(config.getWordMode){
@@ -79,9 +84,9 @@ walkFile(dirPath, extension, function(contents, file){
 
                         readFile(config.filePath, function (contents) {
 
-                            var _contents = contents.replace('\r', '');
+//                            var _contents = contents.replace('\r', '');
 
-                            var lines = _contents.split('\n');
+                            var lines = contents.split('\n');
 
                             lines.forEach(function callback(line){
                                 var entries = line.split('\t');
@@ -89,7 +94,7 @@ walkFile(dirPath, extension, function(contents, file){
                                 if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
                                     vietnameseFiles.push(new File(entries[0]));
                                 }
-                                vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: entries[2]});
+                                vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: entries[2].replace('\r', '')});
                             });
 
 //                            util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
@@ -98,6 +103,25 @@ walkFile(dirPath, extension, function(contents, file){
 
                         alreadyReadFile = true;
                     }
+                    for (var i = 0; i < vietnameseFiles.length; i++) {
+                        var vietnameseFile = vietnameseFiles[i];
+                        var fileFound = false,
+                            wordFound = false;
+
+                        if(vietnameseFile.path === file){
+
+                            for (var j = 0; j < vietnameseFile.Words.length; j++) {
+                                var _word = vietnameseFile.Words[j];
+
+                                if(_word === word){
+
+                                }
+                            }
+                            fileFound = true;
+                            break;
+                        }
+                    }
+                    if(!fileFound) util.debug('cannot find file: '+file);
                 }
             });
         });

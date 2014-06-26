@@ -1,16 +1,24 @@
+var beginOfFile = false;
+
 exports.walkXml = function(result, callback){
     // first go into the root node
     for (var rootNode in result) {
         if (result.hasOwnProperty(rootNode)) {
 
+            beginOfFile = true;
             walkAllChildNode(result[rootNode], callback);
-
-
         }
     }
 };
 
 function walkAllChildNode(result, callback) {
+
+    var _beginOfFile = false;
+
+    if(beginOfFile){
+        beginOfFile = false;
+        _beginOfFile = true;
+    }
 
     // walk into each tag of  root xml tag
     for (var _node in result) {
@@ -49,5 +57,10 @@ function walkAllChildNode(result, callback) {
                 }
             }
         }
+    }
+
+    // check end of file
+    if(_beginOfFile){
+        callback('EoF_EoF');
     }
 }
