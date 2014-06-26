@@ -80,7 +80,7 @@ function main() {
 
         xmlParser.parseString(contents, function (err, result) {
 
-            walkXml(result, function callback(word, object, property) {
+            walkXml(result, function callback(word, object, property, type) {
 
                 // if end of xml file, write file to disk
                 if (word === 'EoF_EoF') {
@@ -155,10 +155,16 @@ function main() {
                                     if (_word.i == wordCount) {
 
                                         if(_word.w !== '#N/A'){
-                                            // replace chinese in xml with vietnamese from txt file
-                                            object[property] = '<![CDATA['+_word.w+']]>';
+
+                                            if(type === ' attribute'){
+
+                                                // replace chinese in xml with vietnamese from txt file
+                                                object[property] = '<![CDATA['+_word.w+']]>';
+                                            } else {
+                                                object[property] = _word.w;
+                                            }
                                         }
-                                        
+
                                         wordFound = true;
                                         break;
                                     }

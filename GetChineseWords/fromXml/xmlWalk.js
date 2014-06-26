@@ -36,12 +36,12 @@ function walkAllChildNode(result, callback) {
                         for (var property in node.$) {
                             if (node.$.hasOwnProperty(property)) {
 
-                                callback(node.$[property], node.$, property);
+                                callback(node.$[property], node.$, property, 'attribute');
                             }
                         }
                     }
                     if (node._) {
-                        callback(node._, node, '_');
+                        callback(node._, node, '_', 'content');
                     }
                     // walk into child node
                     for (var childNode in node) {
@@ -53,7 +53,7 @@ function walkAllChildNode(result, callback) {
                         }
                     }
                 } else {
-                    callback(node, result[_node], i);
+                    callback(node, result[_node], i, 'content');
                 }
             }
         }
