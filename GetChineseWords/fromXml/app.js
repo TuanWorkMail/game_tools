@@ -54,8 +54,8 @@ if(!config.getWordMode){
                 vietnameseFiles.push(new File(entries[0]));
             }
             if(typeof entries[2] !== 'undefined') {
-                var word = entries[2],
-                    word2 = word.replace('\r', '').replace('\"', '');
+                var word = entries[2];
+                var word2 = word.replace('\r', '');
             } else {
                 word2 = entries[2];
             }
@@ -89,7 +89,9 @@ function main() {
                     var xml = builder.buildObject(result);
 //                    util.debug(xml);
 
-                    createFile(dirPath+'_output'+getShortPath(file), xml);
+                    var xml2 = unescapeHTML(xml);
+
+                    createFile(dirPath+'_output'+getShortPath(file), xml2);
                 }
 
                 // for every word found in xml, check if chinese
@@ -153,8 +155,8 @@ function main() {
                                     if (_word.i == wordCount) {
 
                                         // replace chinese in xml with vietnamese from txt file
-                                        object[property] = _word.w;
-1
+                                        object[property] = '<![CDATA['+_word.w+']]>';
+
                                         wordFound = true;
                                         break;
                                     }
@@ -175,6 +177,10 @@ function main() {
         xmlParser.reset();
     });
 
+}
+
+function unescapeHTML(escapedHTML) {
+    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"');
 }
 
 function getShortPath(path){
@@ -207,9 +213,6 @@ function createFile(path, content){
 }
 
 io.on('connection', function (socket) {
-
-
-
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
 });
 
