@@ -44,7 +44,7 @@ if(!config.getWordMode){
 
         var lines = _contents.split('\n');
 
-        lines.forEach(function callback(line){
+        lines.forEach(function (line){
             var entries = line.split('\t');
 
             if(entries.length !== 3) util.debug('length !== 3');
@@ -71,6 +71,8 @@ if(!config.getWordMode){
     alreadyReadFile = true;
 } else main();
 
+var alreadyWords = [];
+
 function main() {
 
     walkFile(dirPath, extension, function (contents, file) {
@@ -80,7 +82,7 @@ function main() {
 
         xmlParser.parseString(contents, function (err, result) {
 
-            walkXml(result, function callback(word, object, property, type) {
+            walkXml(result, function (word, object, property, type) {
 
                 // if end of xml file, write file to disk
                 if (word === 'EoF_EoF') {
@@ -94,106 +96,131 @@ function main() {
                     createFile(dirPath+'_output'+getShortPath(file), xml2);
                 }
 
-                var isChinese = false;
-
                 // for every word found in xml, check if chinese
-                checkChinese(word, function callback2() {
+                checkChinese(word, function (isChinese) {
 
-                    isChinese = true;
+                    if(isChinese) {
 
-                    // extract mode
-                    if (config.getWordMode) {
+                        // extract mode
+                        if (config.getWordMode) {
 
-                        if (characterCount > config.characterLimit) {
+                            if (characterCount > config.characterLimit) {
 
-                            createFile("D:\\json\\json" + fileCount + ".txt", string);
+                                createFile("D:\\json\\json" + fileCount + ".txt", string);
 
-                            fileCount++;
-                            string = '';
-                            chineseFiles = [];
+                                fileCount++;
+                                string = '';
+                                chineseFiles = [];
 
-                            characterCount = 0;
-                        }
+                                characterCount = 0;
+                            }
 
-                        if (firstChineseOfFile) {
+                            if (firstChineseOfFile) {
 
-                            var shortPath = getShortPath(file);
-                            chineseFiles.push(new File(shortPath));
+                                var shortPath = getShortPath(file);
+                                chineseFiles.push(new File(shortPath));
 
-                            var _string = shortPath + '\n';
-                            characterCount += _string.length;
-                            string += _string;
+                                var _string = shortPath + '\n';
+                                characterCount += _string.length;
+                                string += _string;
 
-                            firstChineseOfFile = false;
-                        }
+                                firstChineseOfFile = false;
+                            }
 
 //                util.debug(JSON.stringify(chineseFiles));
 //                chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
 
-                        _string = wordCount + '\nw":"' + word + '"\n';
+                            _string = wordCount + '\nw":"' + word + '"\n';
 
-                        characterCount += _string.length;
-                        string += _string;
-
-                    } else {  //put word mode on
+                            characterCount += _string.length;
+                            string += _string;
 
 
-                        var fileFound = false,
-                            wordFound = false;
 
-                        // loop vietnamese words
-                        for (var i = 0; i < vietnameseFiles.length; i++) {
-                            var vietnameseFile = vietnameseFiles[i];
+                        } else {  //put word mode on
 
-                            // get words from the same file path
-                            if (vietnameseFile.path === getShortPath(file)) {
+                            var fileFound = false,
+                                wordFound = false;
+
+                            // loop vietnamese words
+                            for (var i = 0; i < vietnameseFiles.length; i++) {
+                                var vietnameseFile = vietnameseFiles[i];
+
+                                // get words from the same file path
+                                if (vietnameseFile.path === getShortPath(file)) {
 
 //                                util.debug(vietnameseFile.path + ' === ' + getShortPath(file));
 
-                                for (var j = 0; j < vietnameseFile.Words.length; j++) {
-                                    var _word = vietnameseFile.Words[j];
+                                    for (var j = 0; j < vietnameseFile.Words.length; j++) {
+                                        var _word = vietnameseFile.Words[j];
 
 //                                    util.debug(_word.i +'!=='+ wordCount);
 
-                                    // check word position
-                                    if (_word.i == wordCount) {
+                                        // check word position
+                                        if (_word.i == wordCount) {
 
-                                        if(_word.w !== '#N/A'){
+                                            if (_word.w !== '#N/A') {
 
-                                            if(type === 'content'){
+                                                if (type === 'content') {
 
-                                                // replace chinese in xml with vietnamese from txt file
-                                                object[property] = '<![CDATA['+_word.w+']]>';
-                                            } else {
-                                                object[property] = _word.w;
+                                                    // replace chinese in xml with vietnamese from txt file
+                                                    object[property] = addCDATA(_word.w);
+
+                                                } else {
+                                                    object[property] = _word.w;
+                                                }
+
+                                                wordFound = true;
+                                                break;
                                             }
                                         }
-
-                                        wordFound = true;
-                                        break;
                                     }
+                                    if(!wordFound){
+                                        object[property] = addCDATA(word);
+                                    }
+                                    fileFound = true;
+                                    break;
                                 }
-                                fileFound = true;
-                                break;
                             }
-                            if (fileFound) {
-                                util.debug('file found, breaking....');
-                                break;
-                            }
+                            if(!fileFound) util.debug('cannot find file: '+getShortPath(file));
                         }
-//                    if(!fileFound) util.debug('cannot find file: '+getShortPath(file));
+
+                    }else{
+                        if(type === 'content'){
+                            object[property] = addCDATA(word);
+                        }
                     }
                 });
-                if(!isChinese){
-                    if(type === 'content'){
-                        object[property] = '<![CDATA['+word+']]>';
-                    }
-                }
             });
         });
         xmlParser.reset();
     });
 
+}
+
+function addCDATA(word){
+
+    var check = false;
+
+    for (var i = 0; i < alreadyWords.length; i++) {
+        var alreadyWord = alreadyWords[i];
+
+        if(alreadyWord === word) {
+
+            check = true;
+            break;
+        }
+    }
+    if(!check){
+
+        var string = '<![CDATA['+word+']]>';
+
+        alreadyWords.push(string);
+
+        return string;
+    } else {
+        return word;
+    }
 }
 
 function unescapeHTML(escapedHTML) {
@@ -208,7 +235,9 @@ function checkChinese(word, callback) {
 
     if (word.toString().match(/[\u3400-\u9FBF]/)) {
 
-        callback();
+        callback(true);
+    } else {
+        callback(false);
     }
     wordCount++;
 
