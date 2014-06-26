@@ -156,7 +156,7 @@ function main() {
 
                                         if(_word.w !== '#N/A'){
 
-                                            if(type === ' attribute'){
+                                            if(type === 'content'){
 
                                                 // replace chinese in xml with vietnamese from txt file
                                                 object[property] = '<![CDATA['+_word.w+']]>';
@@ -188,7 +188,7 @@ function main() {
 }
 
 function unescapeHTML(escapedHTML) {
-    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"');
+    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'');
 }
 
 function getShortPath(path){
