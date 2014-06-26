@@ -154,9 +154,11 @@ function main() {
                                     // check word position
                                     if (_word.i == wordCount) {
 
-                                        // replace chinese in xml with vietnamese from txt file
-                                        object[property] = '<![CDATA['+_word.w+']]>';
-
+                                        if(_word.w !== '#N/A'){
+                                            // replace chinese in xml with vietnamese from txt file
+                                            object[property] = '<![CDATA['+_word.w+']]>';
+                                        }
+                                        
                                         wordFound = true;
                                         break;
                                     }
