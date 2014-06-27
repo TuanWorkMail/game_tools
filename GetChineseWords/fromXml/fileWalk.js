@@ -7,24 +7,19 @@ exports._walk = function(dirPath, extension, callback) {
         if (err) console.log(err);
         else {
 
-            if(files !== 'EoD_EoD'){
+            files.filter(function (file) {
 
-                files.filter(function (file) {
+                return file.substr(-extension.length) === extension;
 
-                    return file.substr(-extension.length) === extension;
+            }).forEach(function (file) {
 
-                }).forEach(function (file) {
+                readFile(file, function callback2(contents){
 
-                    readFile(file, function callback2(contents){
-
-                        callback(contents, file);
-                    })
+                    callback(contents, file);
                 })
-
-            } else callback('EoD_EoD', 'EoD_EoD');
-
+            });
         }
-    })
+    });
 };
 
 // http://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search
@@ -35,34 +30,22 @@ function walk(dir, callback) {
         var pending = list.length;
         if (!pending) return callback(null, results);
 
-        // change from forEach to check last iteration
-        for (var i = 0; i < list.length; i++) {
-            var file = list[i];
-
+        list.forEach(function (file) {
             file = dir + '/' + file;
 
-            // because fs.stat is async
-            (function(file, i){
+            fs.stat(file, function (err, stat) {
+                if (stat && stat.isDirectory()) {
 
-                fs.stat(file, function (err, stat) {
-                    if (stat && stat.isDirectory()) {
-
-                        walk(file, function (err, res) {
-                            results = results.concat(res);
-                            if (!--pending) callback(null, results);
-                        });
-                    } else {
-                        results.push(file);
+                    walk(file, function (err, res) {
+                        results = results.concat(res);
                         if (!--pending) callback(null, results);
-                    }
-                });
-
-                //if the last file in root dir
-                if(i===list.length-1) callback(null, 'EoD_EoD');
-
-            })(file, i);
-
-        }
+                    });
+                } else {
+                    results.push(file);
+                    if (!--pending) callback(null, results);
+                }
+            });
+        });
     });
 }
 

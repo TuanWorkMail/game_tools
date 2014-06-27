@@ -5,9 +5,9 @@
     <title></title>
 </head>
 <body>
-<pre id="output">aloha</pre>
+<input type="button" value="get chinese" onclick="getChinese()">
 
-<textarea id="source">abc</textarea>
+<div id="output">aloha</div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -33,6 +33,10 @@
 
         document.getElementById('source').innerHTML = 'hello';
     });
+
+    function getChinese(){
+        socket.emit('get chinese');
+    }
 
 </script>
 </body>
