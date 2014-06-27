@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -39,18 +40,8 @@
       <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2300" max-vertical-offset="6426">
-              <caret line="160" column="60" selection-start-line="160" selection-start-column="60" selection-end-line="160" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="xmlWalk.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="209" max-vertical-offset="1479">
-              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state vertical-scroll-proportion="-40.785713" vertical-offset="2615" max-vertical-offset="6358">
+              <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,8 +50,18 @@
       <file leaf-file-name="fileWalk.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48857993" vertical-offset="52" max-vertical-offset="2346">
-              <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.15628192" vertical-offset="255" max-vertical-offset="2635">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="xmlWalk.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1479">
+              <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -120,9 +121,9 @@
         <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/checkChinese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" />
       </list>
     </option>
@@ -397,7 +398,15 @@
       <created>1403844433784</created>
       <updated>1403844433784</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="rename done -&gt; callback">
+      <created>1403844876535</created>
+      <updated>1403844876535</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add check last file to walk()">
+      <created>1403845793664</created>
+      <updated>1403845793664</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -455,22 +464,12 @@
     <MESSAGE value="[not tested]rewrite xmlWalk to not duplicate" />
     <MESSAGE value="only write file in PUT mode&#10;&#10;add a separator&#10;" />
     <MESSAGE value="xmlWalker tested and fixed&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="xmlWalker tested and fixed&#10;" />
+    <MESSAGE value="rename done -&gt; callback" />
+    <MESSAGE value="add check last file to walk()" />
+    <option name="LAST_COMMIT_MESSAGE" value="add check last file to walk()" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js</url>
-          <line>287</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js</url>
-          <line>223</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="52" />
     </breakpoint-manager>
   </component>
@@ -834,16 +833,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2300" max-vertical-offset="6426">
-          <caret line="160" column="60" selection-start-line="160" selection-start-column="60" selection-end-line="160" selection-end-column="60" />
+        <state vertical-scroll-proportion="-40.785713" vertical-offset="2615" max-vertical-offset="6358">
+          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48857993" vertical-offset="52" max-vertical-offset="2346">
-          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.15628192" vertical-offset="255" max-vertical-offset="2635">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>

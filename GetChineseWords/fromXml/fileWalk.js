@@ -7,17 +7,22 @@ exports._walk = function(dirPath, extension, callback) {
         if (err) console.log(err);
         else {
 
-            files.filter(function (file) {
+            if(files !== 'EoD_EoD'){
 
-                return file.substr(-extension.length) === extension;
+                files.filter(function (file) {
 
-            }).forEach(function (file) {
+                    return file.substr(-extension.length) === extension;
 
-                readFile(file, function callback2(contents){
+                }).forEach(function (file) {
 
-                    callback(contents, file);
+                    readFile(file, function callback2(contents){
+
+                        callback(contents, file);
+                    })
                 })
-            })
+
+            } else callback('EoD_EoD', 'EoD_EoD');
+
         }
     })
 };

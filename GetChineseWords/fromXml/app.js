@@ -160,6 +160,14 @@ function main() {
 
     walkFile(dirPath, extension, function (contents, file) {
 
+        // if read all file write the last file to disk
+        if (contents === 'EoD_EoD') {
+
+            createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+            return;
+        }
+
         util.debug(getShortPath(file));
 
         wordCount = 0;
@@ -283,18 +291,6 @@ function main() {
         });
         xmlParser.reset();
     });
-
-    // if read all file write the last file to disk
-    if (config.getWordMode && characterCount > 0) {
-
-        createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-        fileCount++;
-        string = '';
-        chineseFiles = [];
-
-        characterCount = 0;
-    }
 
 }
 
