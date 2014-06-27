@@ -172,54 +172,7 @@ function main() {
                             characterCount += _string.length;
                             string += _string;
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        } else {  //put word mode on
-
-                            var fileFound = false,
-                                wordFound = false;
-
-                            // loop vietnamese words
-                            for (var i = 0; i < vietnameseFiles.length; i++) {
-                                var vietnameseFile = vietnameseFiles[i];
-
-                                // get words from the same file path
-                                if (vietnameseFile.path === getShortPath(file)) {
-
-//                                util.debug(vietnameseFile.path + ' === ' + getShortPath(file));
-
-                                    for (var j = 0; j < vietnameseFile.Words.length; j++) {
-                                        var _word = vietnameseFile.Words[j];
-
-//                                    util.debug(_word.i +'!=='+ wordCount);
-
-                                        // check word position
-                                        if (_word.i == wordCount) {
-
-                                            if (_word.w !== '#N/A') {
-
-                                                if (type === 'content') {
-
-                                                    // replace chinese in xml with vietnamese from txt file
-                                                    object[property] = _word.w;
-
-                                                } else {
-                                                    object[property] = _word.w;
-                                                }
-
-                                                wordFound = true;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if(!wordFound){
-                                        object[property] = word;
-                                    }
-                                    fileFound = true;
-                                    break;
-                                }
-                            }
-                            if(!fileFound) util.debug('cannot find file: '+getShortPath(file));
                         }
 
                     }else{
