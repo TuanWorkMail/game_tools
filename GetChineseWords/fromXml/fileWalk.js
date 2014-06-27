@@ -23,12 +23,12 @@ exports._walk = function(dirPath, extension, callback) {
 };
 
 // http://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search
-function walk(dir, done) {
+function walk(dir, callback) {
     var results = [];
     fs.readdir(dir, function (err, list) {
-        if (err) return done(err);
+        if (err) return callback(err);
         var pending = list.length;
-        if (!pending) return done(null, results);
+        if (!pending) return callback(null, results);
 
         list.forEach(function (file) {
             file = dir + '/' + file;
@@ -38,11 +38,11 @@ function walk(dir, done) {
 
                     walk(file, function (err, res) {
                         results = results.concat(res);
-                        if (!--pending) done(null, results);
+                        if (!--pending) callback(null, results);
                     });
                 } else {
                     results.push(file);
-                    if (!--pending) done(null, results);
+                    if (!--pending) callback(null, results);
                 }
             });
         });
