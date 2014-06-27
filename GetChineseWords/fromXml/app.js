@@ -160,14 +160,6 @@ function main() {
 
     walkFile(dirPath, extension, function (contents, file) {
 
-        // if read all file write the last file to disk
-        if (contents === 'EoD_EoD') {
-
-            createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-            return;
-        }
-
         util.debug(getShortPath(file));
 
         wordCount = 0;
@@ -356,6 +348,11 @@ function createFile(path, content){
 
 io.on('connection', function (socket) {
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
+    socket.on('get chinese', function(){
+
+        createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+    });
 });
 
 function File(path) {

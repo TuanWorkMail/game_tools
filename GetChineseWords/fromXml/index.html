@@ -7,7 +7,7 @@
 <body>
 <input type="button" value="get chinese" onclick="getChinese()">
 
-<div id="output">aloha</div>
+<table><tbody id="output"></tbody></table>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -16,7 +16,7 @@
     socket.on('chat message', function(msg){
         var chineseFiles = JSON.parse(msg.chineseFiles);
 
-        var html = '<table><tbody>';
+        var html = '';
 
         for (var i = 0; i < chineseFiles.length; i++) {
             var file = chineseFiles[i];
@@ -27,7 +27,6 @@
                 html += '<tr><td>' + file.path + '</td><td>' + word.i + '</td><td>' + word.w + '</td></tr>';
             }
         }
-        html += '</tbody></table>';
 
         document.getElementById('output').innerHTML = msg.chineseFiles;
 

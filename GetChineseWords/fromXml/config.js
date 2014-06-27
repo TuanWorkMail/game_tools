@@ -1,4 +1,4 @@
-exports.dirPath = 'D:\\config';
+exports.dirPath = 'D:\\config_output';
 exports.filePath = 'D:\\config_zh.txt';
 exports.extension = '.xml';
 exports.mode = 'excel';
