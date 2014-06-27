@@ -1,78 +1,45 @@
-var config = require('./config'),
-    dirPath = config.dirPath,
-    extension = config.extension,
-    xml2js = require('xml2js'),
-    xmlParser = xml2js.Parser(),
-    escapeHtml = require('./escapeHtml').escapeHtml,
-    util = require('util');
-
-var app = require('express')();
-var http = require('http').Server(app);
-app.get('/', function (req, res) {
-    res.sendfile('fromXml/index.html');
-});
-app.get('/jquery-1.10.2.js', function (req, res) {
-    res.sendfile('fromXml/jquery-1.10.2.js');
-});
-http.listen(3000, function () {
-    console.log('listening on *:3000');
-});
-
-var fs = require('fs');
-var io = require('socket.io')(http);
-var chineseFiles = [],
-    wordCount = 0,
-    string = '',
-    characterCount = 0,
-    fileCount = 0;
-
-var alreadyReadFile = false,
-    vietnameseFiles = [];
-
-var fileWalk = require('./fileWalk'),
-    walkFile = fileWalk._walk,
-    readFile = fileWalk.readFile,
-    walkXml = require('./xmlWalk').walkXml;
+function initialize() {
 
 // read file only once
-if(!config.getWordMode){
+    if (!config.getWordMode) {
 
-    readFile(config.filePath, function (contents) {
+        readFile(config.filePath, function (contents) {
 
 //        var _contents = contents.replace('\r\n', '\n').replace('\r','');
-        var _contents = contents;
+            var _contents = contents;
 
-        var lines = _contents.split('\n');
+            var lines = _contents.split('\n');
 
-        lines.forEach(function (line){
-            var entries = line.split('\t');
+            lines.forEach(function (line) {
+                var entries = line.split('\t');
 
-            if(entries.length !== 4) util.debug('length !== 4');
+                if (entries.length !== 4) util.debug('length !== 4');
 
-            // REMEMBER TO SORT THE EXCEL FILE FIRST
-            // if array is empty OR if current path is different from the last path
-            if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
-                vietnameseFiles.push(new File(entries[0]));
-            }
-            if(typeof entries[3] !== 'undefined') {
-                var word = entries[3];
-                var word2 = word.replace(/\r/g, '');
-            } else {
-                word2 = entries[3];
-            }
+                // REMEMBER TO SORT THE EXCEL FILE FIRST
+                // if array is empty OR if current path is different from the last path
+                if (vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length - 1].path !== entries[0]) {
+                    vietnameseFiles.push(new File(entries[0]));
+                }
+                if (typeof entries[3] !== 'undefined') {
+                    var word = entries[3];
+                    var word2 = word.replace(/\r/g, '');
+                } else {
+                    word2 = entries[3];
+                }
 
-            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], zh: entries[2], vn: word2});
-        });
+                vietnameseFiles[vietnameseFiles.length - 1].Words.push({i: entries[1], zh: entries[2], vn: word2});
+            });
 
 //        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
 
-        replaceChineseWithVietnamese();
-    });
+            replaceChineseWithVietnamese();
+        });
 
-    alreadyReadFile = true;
-} else main();
+        alreadyReadFile = true;
+    } else main();
 
-var alreadyWords = [];
+}
+
 
 function replaceChineseWithVietnamese(){
 
@@ -137,24 +104,6 @@ function replaceChineseWithVietnamese(){
 
 }
 
-function escapeRegExp(string) {
-    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-}
-
-function replaceAll(string, find, replace) {
-    return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-}
-
-function test(){
-    var contents = '<addition><![CDATA[<b>[功能效果]</b><br>全属性+20]]></addition>';
-
-    var chinese = '/'+'B'+'/g';
-
-    var contents_vn = replaceAll(contents, '<b>[功能效果]</b><br>全属性+20', '<b>[abc]</b><br>xyz+20');
-
-    util.debug(contents_vn);
-}
-//test();
 
 function main() {
 
@@ -252,7 +201,7 @@ function main() {
                                                 if (type === 'content') {
 
                                                     // replace chinese in xml with vietnamese from txt file
-                                                    object[property] = addCDATA(_word.w);
+                                                    object[property] = _word.w;
 
                                                 } else {
                                                     object[property] = _word.w;
@@ -264,7 +213,7 @@ function main() {
                                         }
                                     }
                                     if(!wordFound){
-                                        object[property] = addCDATA(word);
+                                        object[property] = word;
                                     }
                                     fileFound = true;
                                     break;
@@ -275,7 +224,7 @@ function main() {
 
                     }else{
                         if(type === 'content'){
-                            object[property] = addCDATA(word);
+                            object[property] = word;
                         }
                     }
                 });
@@ -286,34 +235,49 @@ function main() {
 
 }
 
-function addCDATA(word){
+////////////////////////////////////////////////////////////
 
-    var check = false;
+var config = require('./config'),
+    dirPath = config.dirPath,
+    extension = config.extension,
+    xml2js = require('xml2js'),
+    xmlParser = xml2js.Parser(),
+    escapeHtml = require('./escapeHtml').escapeHtml,
+    util = require('util');
 
-    for (var i = 0; i < alreadyWords.length; i++) {
-        var alreadyWord = alreadyWords[i];
+var app = require('express')();
+var http = require('http').Server(app);
+app.get('/', function (req, res) {
+    res.sendfile('fromXml/index.html');
+});
+app.get('/jquery-1.10.2.js', function (req, res) {
+    res.sendfile('fromXml/jquery-1.10.2.js');
+});
+http.listen(3000, function () {
+    console.log('listening on *:3000');
+});
 
-        if(alreadyWord === word) {
+var fs = require('fs');
+var io = require('socket.io')(http);
+var chineseFiles = [],
+    wordCount = 0,
+    string = '',
+    characterCount = 0,
+    fileCount = 0;
 
-            check = true;
-            break;
-        }
-    }
-    if(!check){
+var alreadyReadFile = false,
+    vietnameseFiles = [];
 
-        var string = '<![CDATA['+word+']]>';
+var fileWalk = require('./fileWalk'),
+    walkFile = fileWalk._walk,
+    readFile = fileWalk.readFile,
+    walkXml = require('./xmlWalk').walkXml;
 
-        alreadyWords.push(string);
+var alreadyWords = [];
 
-        return string;
-    } else {
-        return word;
-    }
-}
+initialize();
 
-function unescapeHTML(escapedHTML) {
-    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"');
-}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getShortPath(path){
     return path.replace(dirPath, '');
@@ -363,3 +327,10 @@ function File(path) {
     }
 }
 
+function escapeRegExp(string) {
+    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
+function replaceAll(string, find, replace) {
+    return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
