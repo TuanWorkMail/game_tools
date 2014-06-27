@@ -1,6 +1,6 @@
 var beginOfFile = false;
 
-exports.walkXml = function(result, callback){
+exports.walkXml = function (result, callback) {
     // first go into the root node
     for (var rootNode in result) {
         if (result.hasOwnProperty(rootNode)) {
@@ -15,55 +15,59 @@ function walkAllChildNode(result, callback) {
 
     var _beginOfFile = false;
 
-    if(beginOfFile){
+    if (beginOfFile) {
         beginOfFile = false;
         _beginOfFile = true;
     }
 
-    ///////////////////////////////////////////////////
-    // walk into each tag of  root xml tag
-    for (var _node in result) {
-        if (result.hasOwnProperty(_node)) {
+    // walk all content of the same tag
+    for (var i = 0; i < result.length; i++) {
 
-            // walk all content of the same tag
-            for (var i = 0; i < result[_node].length; i++) {
-                var node = result[_node][i];
-                //////////////////////////////////////////////////////////
-                // this block is in reverse order thats why its walk 1 file over and over again
+        // check content inside the tag
+        if (typeof result[i] === 'object') {
 
-                // check content inside the tag
-                if (typeof node === 'object') {
+            // walk into each tag of  root xml tag
+            for (var _node in result[i]) {
+                if (result[i].hasOwnProperty(_node)) {
+
+                    var node = result[i][_node];
 
                     // check properties of tag
-                    if(node.$) {
-                        for (var property in node.$) {
-                            if (node.$.hasOwnProperty(property)) {
+                    if (_node === '$') {
 
-                                callback(node.$[property], node.$, property, 'attribute');
+                        for (var attribute in node) {
+                            if (node.hasOwnProperty(attribute)) {
+
+                                callback(node[attribute], node, attribute, 'attribute');
                             }
                         }
-                    }
-                    if (node._) {
-                        callback(node._, node, '_', 'content');
-                    }
-                    // walk into child node
-                    for (var childNode in node) {
-                        if (node.hasOwnProperty(childNode)) {
 
-                            if (childNode !== '$' && typeof node[childNode] === 'object') {
+                    } else if (_node === '_') {
+                        callback(node, result[i], '_', 'content');
+                    } else {
+
+                        // walk into child node
+                        for (var childNode in node) {
+                            if (node.hasOwnProperty(childNode)) {
+
                                 walkAllChildNode(node, callback);
+
                             }
                         }
+
                     }
-                } else {
-                    callback(node, result[_node], i, 'content');
                 }
             }
+
+        } else {
+            callback(result[i], result, i, 'content');
         }
+
+
     }
 
     // check end of file
-    if(_beginOfFile){
+    if (_beginOfFile) {
         callback('EoF_EoF');
     }
 }
