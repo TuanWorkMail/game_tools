@@ -160,6 +160,8 @@ function main() {
 
     walkFile(dirPath, extension, function (contents, file) {
 
+        util.debug(getShortPath(file));
+
         wordCount = 0;
         var firstChineseOfFile = true;
 
@@ -203,7 +205,9 @@ function main() {
                                 var shortPath = getShortPath(file);
                                 chineseFiles.push(new File(shortPath));
 
-                                var _string = shortPath + '\n';
+//                                var _string = shortPath + '\n';
+                                var _string = shortPath + '\t';
+
                                 characterCount += _string.length;
                                 string += _string;
 
@@ -213,7 +217,8 @@ function main() {
 //                util.debug(JSON.stringify(chineseFiles));
 //                chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
 
-                            _string = wordCount + '\nw":"' + word + '"\n';
+//                            _string = wordCount + '\nw":"' + word + '"\n';
+                            _string = wordCount + '\t' + word + '\n';
 
                             characterCount += _string.length;
                             string += _string;
@@ -278,6 +283,18 @@ function main() {
         });
         xmlParser.reset();
     });
+
+    // if read all file write the last file to disk
+    if (config.getWordMode && characterCount > 0) {
+
+        createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+        fileCount++;
+        string = '';
+        chineseFiles = [];
+
+        characterCount = 0;
+    }
 
 }
 

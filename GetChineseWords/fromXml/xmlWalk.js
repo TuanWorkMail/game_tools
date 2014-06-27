@@ -1,12 +1,21 @@
 var beginOfFile = false;
 
 exports.walkXml = function (result, callback) {
+
+    beginOfFile = true;
+
     // first go into the root node
     for (var rootNode in result) {
         if (result.hasOwnProperty(rootNode)) {
 
-            beginOfFile = true;
-            walkAllChildNode(result[rootNode], callback);
+            // because the root node is object and not array
+            for (var childNode in result[rootNode]) {
+                if (result[rootNode].hasOwnProperty(childNode)) {
+
+                    walkAllChildNode(result[rootNode][childNode], callback);
+                }
+            }
+
         }
     }
 };
