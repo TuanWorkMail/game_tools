@@ -54,14 +54,14 @@ if(!config.getWordMode){
             if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
                 vietnameseFiles.push(new File(entries[0]));
             }
-            if(typeof entries[2] !== 'undefined') {
-                var word = entries[2];
-                var word2 = word.replace('\r', '');
+            if(typeof entries[3] !== 'undefined') {
+                var word = entries[3];
+                var word2 = word.replace(/\r/g, '');
             } else {
-                word2 = entries[2];
+                word2 = entries[3];
             }
 
-            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], zh: entries[2], vn: entries[3]});
+            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], zh: entries[2], vn: word2});
         });
 
 //        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
@@ -77,6 +77,9 @@ var alreadyWords = [];
 function replaceChineseWithVietnamese(){
 
     walkFile(dirPath, extension, function (contents, file) {
+//        util.debug(contents);
+
+        var writeContent = contents;
 
         // loop vietnamese words
         for (var i = 0; i < vietnameseFiles.length; i++) {
@@ -91,7 +94,7 @@ function replaceChineseWithVietnamese(){
                 for (var j = 0; j < vietnameseFile.Words.length; j++) {
                     var _word = vietnameseFile.Words[j];
 
-                    wordLengths.push({_length: _word.w.length, word: _word});
+                    wordLengths.push({_length: _word.zh.length, word: _word});
                 }
                 // sort word length
                 function compare(a,b) {
@@ -103,18 +106,55 @@ function replaceChineseWithVietnamese(){
                 }
                 wordLengths.sort(compare);
 
+                var vn = contents;
+
                 // replace the word
                 for (var j = 0; j < wordLengths.length; j++) {
                     var wordLength = wordLengths[j];
 
-                }
-            }
+//                    util.debug(wordLength.word.zh);
+//                    util.debug(escapeRegExp(wordLength.word.zh));
+//                    util.debug(wordLength.word.vn);
 
+                    if(wordLength.word.vn !== '#N/A') {
+
+                        vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);
+                    }
+
+                }
+//                util.debug(vn);
+
+                writeContent = vn;
+
+                break;
+
+            }
         }
+
+        createFile(dirPath+'_output'+getShortPath(file), writeContent);
 
     });
 
 }
+
+function escapeRegExp(string) {
+    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
+function replaceAll(string, find, replace) {
+    return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+
+function test(){
+    var contents = '<addition><![CDATA[<b>[功能效果]</b><br>全属性+20]]></addition>';
+
+    var chinese = '/'+'B'+'/g';
+
+    var contents_vn = replaceAll(contents, '<b>[功能效果]</b><br>全属性+20', '<b>[abc]</b><br>xyz+20');
+
+    util.debug(contents_vn);
+}
+//test();
 
 function main() {
 
