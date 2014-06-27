@@ -167,8 +167,8 @@ function main() {
 
             walkXml(result, function (word, object, property, type) {
 
-                // if end of xml file, write file to disk
-                if (word === 'EoF_EoF') {
+                // if end of xml file, write file to disk ONLY IN PUT MODE
+                if (word === 'EoF_EoF' && !config.getWordMode) {
 
                     var builder = new xml2js.Builder({renderOpts: { 'pretty': true, 'indent': '  ', 'newline': '\n' }});
                     var xml = builder.buildObject(result);
@@ -218,7 +218,7 @@ function main() {
                             characterCount += _string.length;
                             string += _string;
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 
                         } else {  //put word mode on
 

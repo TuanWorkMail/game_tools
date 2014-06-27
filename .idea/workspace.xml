@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" />
     </list>
     <ignored path="game-script.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +39,8 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.1737835" vertical-offset="3294" max-vertical-offset="6137">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.1191659" vertical-offset="2613" max-vertical-offset="6137">
+              <caret line="220" column="98" selection-start-line="220" selection-start-column="98" selection-end-line="220" selection-end-column="98" />
               <folding />
             </state>
           </provider>
@@ -50,7 +49,7 @@
       <file leaf-file-name="xmlWalk.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+            <state vertical-scroll-proportion="0.0" vertical-offset="319" max-vertical-offset="1326">
               <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
               <folding />
             </state>
@@ -122,9 +121,9 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/checkChinese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       </list>
     </option>
   </component>
@@ -386,7 +385,11 @@
       <created>1403840855373</created>
       <updated>1403840855373</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="[not tested]rewrite xmlWalk to not duplicate">
+      <created>1403842167959</created>
+      <updated>1403842167959</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -441,7 +444,8 @@
     <MESSAGE value="change from parse xml to replace word" />
     <MESSAGE value="change from parse xml to replace word&#10;&#10;YEAH FUCKING DONE IT MOTHERFUCKER" />
     <MESSAGE value="add xml walker bug comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="add xml walker bug comment" />
+    <MESSAGE value="[not tested]rewrite xmlWalk to not duplicate" />
+    <option name="LAST_COMMIT_MESSAGE" value="[not tested]rewrite xmlWalk to not duplicate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -805,14 +809,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
-          <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
@@ -821,10 +817,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326">
+          <caret line="45" column="48" selection-start-line="45" selection-start-column="48" selection-end-line="45" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.1737835" vertical-offset="3294" max-vertical-offset="6137">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.1191659" vertical-offset="2613" max-vertical-offset="6137">
+          <caret line="220" column="98" selection-start-line="220" selection-start-column="98" selection-end-line="220" selection-end-column="98" />
           <folding />
         </state>
       </provider>
