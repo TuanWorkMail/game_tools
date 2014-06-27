@@ -20,6 +20,7 @@ function walkAllChildNode(result, callback) {
         _beginOfFile = true;
     }
 
+    ///////////////////////////////////////////////////
     // walk into each tag of  root xml tag
     for (var _node in result) {
         if (result.hasOwnProperty(_node)) {
@@ -27,6 +28,8 @@ function walkAllChildNode(result, callback) {
             // walk all content of the same tag
             for (var i = 0; i < result[_node].length; i++) {
                 var node = result[_node][i];
+                //////////////////////////////////////////////////////////
+                // this block is in reverse order thats why its walk 1 file over and over again
 
                 // check content inside the tag
                 if (typeof node === 'object') {
