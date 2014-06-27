@@ -30,22 +30,34 @@ function walk(dir, callback) {
         var pending = list.length;
         if (!pending) return callback(null, results);
 
-        list.forEach(function (file) {
+        // change from forEach to check last iteration
+        for (var i = 0; i < list.length; i++) {
+            var file = list[i];
+
             file = dir + '/' + file;
 
-            fs.stat(file, function (err, stat) {
-                if (stat && stat.isDirectory()) {
+            // because fs.stat is async
+            (function(file, i){
 
-                    walk(file, function (err, res) {
-                        results = results.concat(res);
+                fs.stat(file, function (err, stat) {
+                    if (stat && stat.isDirectory()) {
+
+                        walk(file, function (err, res) {
+                            results = results.concat(res);
+                            if (!--pending) callback(null, results);
+                        });
+                    } else {
+                        results.push(file);
                         if (!--pending) callback(null, results);
-                    });
-                } else {
-                    results.push(file);
-                    if (!--pending) callback(null, results);
-                }
-            });
-        });
+                    }
+                });
+
+                //if the last file in root dir
+                if(i===list.length-1) callback(null, 'EoD_EoD');
+
+            })(file, i);
+
+        }
     });
 }
 
