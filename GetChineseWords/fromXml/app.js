@@ -47,8 +47,9 @@ if(!config.getWordMode){
         lines.forEach(function (line){
             var entries = line.split('\t');
 
-            if(entries.length !== 3) util.debug('length !== 3');
+            if(entries.length !== 4) util.debug('length !== 4');
 
+            // REMEMBER TO SORT THE EXCEL FILE FIRST
             // if array is empty OR if current path is different from the last path
             if(vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length-1].path !== entries[0]){
                 vietnameseFiles.push(new File(entries[0]));
@@ -60,18 +61,60 @@ if(!config.getWordMode){
                 word2 = entries[2];
             }
 
-            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], w: word2});
+            vietnameseFiles[vietnameseFiles.length-1].Words.push({i: entries[1], zh: entries[2], vn: entries[3]});
         });
 
 //        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
 
-        main();
+        replaceChineseWithVietnamese();
     });
 
     alreadyReadFile = true;
 } else main();
 
 var alreadyWords = [];
+
+function replaceChineseWithVietnamese(){
+
+    walkFile(dirPath, extension, function (contents, file) {
+
+        // loop vietnamese words
+        for (var i = 0; i < vietnameseFiles.length; i++) {
+            var vietnameseFile = vietnameseFiles[i];
+
+            // get words from the same file path
+            if (vietnameseFile.path === getShortPath(file)) {
+
+                // word length
+                var wordLengths = [];
+
+                for (var j = 0; j < vietnameseFile.Words.length; j++) {
+                    var _word = vietnameseFile.Words[j];
+
+                    wordLengths.push({_length: _word.w.length, word: _word});
+                }
+                // sort word length
+                function compare(a,b) {
+                    if (a._length < b._length)
+                        return 1;
+                    if (a._length > b._length)
+                        return -1;
+                    return 0;
+                }
+                wordLengths.sort(compare);
+
+                // replace the word
+                for (var j = 0; j < wordLengths.length; j++) {
+                    var wordLength = wordLengths[j];
+
+                }
+            }
+
+        }
+
+    });
+
+}
 
 function main() {
 
@@ -87,7 +130,7 @@ function main() {
                 // if end of xml file, write file to disk
                 if (word === 'EoF_EoF') {
 
-                    var builder = new xml2js.Builder();
+                    var builder = new xml2js.Builder({renderOpts: { 'pretty': true, 'indent': '  ', 'newline': '\n' }});
                     var xml = builder.buildObject(result);
 //                    util.debug(xml);
 
@@ -224,7 +267,7 @@ function addCDATA(word){
 }
 
 function unescapeHTML(escapedHTML) {
-    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'');
+    return escapedHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"');
 }
 
 function getShortPath(path){
