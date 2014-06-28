@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="output">aloha</div>
+
+<script src="xml.js"></script>
+<script>
+    var oParser = new DOMParser();
+    var oDOM = oParser.parseFromString(xml, "text/xml");
+    // print the name of the root element or error message
+    var html = (oDOM.documentElement.nodeName == "parsererror" ? "error while parsing" : oDOM.documentElement.nodeName);
+
+    var oSerializer = new XMLSerializer();
+    html = oSerializer.serializeToString(oDOM);
+
+    document.getElementById('output').innerText = html;
+</script>
+</body>
+</html>
