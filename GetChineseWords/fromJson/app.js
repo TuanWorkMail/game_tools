@@ -119,128 +119,35 @@ function replaceChineseWithVietnamese(){
 
 function main() {
 
-    walkFile(dirPath, extension, function (contents, file) {
-
-        util.debug(getShortPath(file));
 
         wordCount = 0;
-        var firstChineseOfFile = true;
 
-        xmlParser.parseString(contents, function (err, result) {
+    walkJson(json, function(value){
 
-            walkXml(result, function (word, object, property, type) {
+        // for every word found in xml, check if chinese
+        checkChinese('', function (isChinese) {
 
-                // if end of xml file, write file to disk ONLY IN PUT MODE
-                if (word === 'EoF_EoF' && !config.getWordMode) {
+            if(isChinese) {
 
-                    var builder = new xml2js.Builder({renderOpts: { 'pretty': true, 'indent': '  ', 'newline': '\n' }});
-                    var xml = builder.buildObject(result);
-//                    util.debug(xml);
 
-                    var xml2 = unescapeHTML(xml);
 
-                    createFile(dirPath+'_output'+getShortPath(file), xml2);
-                }
-
-                // for every word found in xml, check if chinese
-                checkChinese(word, function (isChinese) {
-
-                    if(isChinese) {
-
-                        // extract mode
-                        if (config.getWordMode) {
-
-                            if (characterCount > config.characterLimit) {
-
-                                createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-                                fileCount++;
-                                string = '';
-                                chineseFiles = [];
-
-                                characterCount = 0;
-                            }
-
-                            if (firstChineseOfFile) {
-
-                                var shortPath = getShortPath(file);
-                                chineseFiles.push(new File(shortPath));
-
-//                                var _string = shortPath + '\n';
-                                var _string = shortPath + '\t';
-
-                                characterCount += _string.length;
-                                string += _string;
-
-                                firstChineseOfFile = false;
-                            }
-
-                            chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
 
 //                            _string = wordCount + '\nw":"' + word + '"\n';
-                            _string = wordCount + '\t' + word + '\n';
+                _string = wordCount + '\t' + word + '\n';
 
-                            characterCount += _string.length;
-                            string += _string;
+                characterCount += _string.length;
+                string += _string;
 
 
-                        }
 
-                    }else{
-                        if(type === 'content'){
-                            object[property] = word;
-                        }
-                    }
-                });
-            });
+            }
         });
-        xmlParser.reset();
+
     });
 
+
+
 }
-
-////////////////////////////////////////////////////////////
-
-var config = require('./config'),
-    dirPath = config.dirPath,
-    extension = config.extension,
-    xml2js = require('xml2js'),
-    xmlParser = xml2js.Parser(),
-    escapeHtml = require('./escapeHtml').escapeHtml,
-    util = require('util');
-
-var app = require('express')();
-var http = require('http').Server(app);
-app.get('/', function (req, res) {
-    res.sendfile('fromXml/index.html');
-});
-app.get('/jquery-1.10.2.js', function (req, res) {
-    res.sendfile('fromXml/jquery-1.10.2.js');
-});
-http.listen(3000, function () {
-    console.log('listening on *:3000');
-});
-
-var fs = require('fs');
-var io = require('socket.io')(http);
-var chineseFiles = [],
-    wordCount = 0,
-    string = '',
-    characterCount = 0,
-    fileCount = 0;
-
-var alreadyReadFile = false,
-    vietnameseFiles = [];
-
-var fileWalk = require('./fileWalk'),
-    walkFile = fileWalk._walk,
-    readFile = fileWalk.readFile,
-    walkXml = require('./xmlWalk').walkXml;
-
-var alreadyWords = [];
-
-initialize();
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function getShortPath(path){
@@ -274,15 +181,6 @@ function createFile(path, content){
     });
 }
 
-io.on('connection', function (socket) {
-//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
-    socket.on('get chinese', function(){
-
-        createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-    });
-});
-
 function File(path) {
     var Words = [];
     return {
@@ -298,3 +196,55 @@ function escapeRegExp(string) {
 function replaceAll(string, find, replace) {
     return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
+////////////////////////////////////////////////////////////
+
+var config = require('./config'),
+    dirPath = config.dirPath,
+    extension = config.extension,
+    xml2js = require('xml2js'),
+    xmlParser = xml2js.Parser(),
+    escapeHtml = require('./escapeHtml').escapeHtml,
+    json = require('./models.json').json,
+    util = require('util');
+
+var app = require('express')();
+var http = require('http').Server(app);
+app.get('/', function (req, res) {
+    res.sendfile('fromXml/index.html');
+});
+app.get('/jquery-1.10.2.js', function (req, res) {
+    res.sendfile('fromXml/jquery-1.10.2.js');
+});
+http.listen(3000, function () {
+    console.log('listening on *:3000');
+});
+
+var fs = require('fs');
+var io = require('socket.io')(http);
+var chineseFiles = [],
+    wordCount = 0,
+    string = '',
+    characterCount = 0,
+    fileCount = 0;
+
+var alreadyReadFile = false,
+    vietnameseFiles = [];
+
+var fileWalk = require('./fileWalk'),
+    walkFile = fileWalk._walk,
+    readFile = fileWalk.readFile,
+    walkJson = require('./jsonWalk').walkJson;
+
+var alreadyWords = [];
+
+
+io.on('connection', function (socket) {
+//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
+    socket.on('get chinese', function(){
+
+        createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+    });
+});
+
+initialize();

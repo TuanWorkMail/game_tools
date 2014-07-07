@@ -85,20 +85,19 @@ function replaceChineseWithVietnamese(){
 
                     if(wordLength.word.vn !== '#N/A') {
 
-                        // only replace content not attribute
 
                         var find, replace;
 
+                        // only replace content not attribute
                         find = '>' + wordLength.word.zh + '<';
                         replace = '>' + wordLength.word.vn + '<';
                         vn = replaceAll(vn, find, replace);
-
                         find = '<![CDATA[' + wordLength.word.zh + ']]>';
                         replace = '<![CDATA[' + wordLength.word.vn + ']]>';
                         vn = replaceAll(vn, find, replace);
 
                         // replace both content and attribute
-//                        vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);
+                        vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);
                     }
 
                 }
@@ -162,7 +161,7 @@ function main() {
                                 characterCount = 0;
                             }
 
-                            if (firstChineseOfFile) {
+//                            if (firstChineseOfFile) {
 
                                 var shortPath = getShortPath(file);
                                 chineseFiles.push(new File(shortPath));
@@ -174,7 +173,7 @@ function main() {
                                 string += _string;
 
                                 firstChineseOfFile = false;
-                            }
+//                            }
 
                             chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
 
