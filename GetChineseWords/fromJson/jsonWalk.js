@@ -1,30 +1,17 @@
-var beginOfFile = false;
+function walkJson(json, callback) {
 
-exports.walkJson = function (json, callback) {
+    if(typeof json === 'object'){
 
+        for (var childNode in json) {
+            if (json.hasOwnProperty(childNode)) {
 
-
-    for (var node in json) {
-        if (json.hasOwnProperty(node)) {
-
-            var tst = json[node];
-
-            console.log(typeof tst);
-        }
-    }
-};
-
-function walkChildNode(node){
-
-    if(typeof node === 'object'){
-
-        for (var childNode in node) {
-            if (node.hasOwnProperty(childNode)) {
-
-                walkChildNode(node[childNode]);
+                walkJson(json[childNode]);
             }
         }
     }else{
-        // checkChinese
+
+        callback(json);
     }
 }
+
+exports.walkJson = walkJson;

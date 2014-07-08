@@ -125,13 +125,11 @@ function main() {
     walkJson(json, function(value){
 
         // for every word found in xml, check if chinese
-        checkChinese('', function (isChinese) {
+        checkChinese(value, function (isChinese) {
 
             if(isChinese) {
 
-
-
-
+                var _string = '';
 //                            _string = wordCount + '\nw":"' + word + '"\n';
                 _string = wordCount + '\t' + word + '\n';
 
@@ -165,7 +163,7 @@ function checkChinese(word, callback) {
     wordCount++;
 
     // find a word that unique to seperate
-    if (word.toString().match('`')) console.log(word);
+    if (word.toString().match('`')) console.log('not unique:'+word);
 }
 
 function createFile(path, content){
