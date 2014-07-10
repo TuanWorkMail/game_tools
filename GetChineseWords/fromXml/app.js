@@ -89,12 +89,12 @@ function replaceChineseWithVietnamese(){
                         var find, replace;
 
                         // only replace content not attribute
-                        find = '>' + wordLength.word.zh + '<';
-                        replace = '>' + wordLength.word.vn + '<';
-                        vn = replaceAll(vn, find, replace);
-                        find = '<![CDATA[' + wordLength.word.zh + ']]>';
-                        replace = '<![CDATA[' + wordLength.word.vn + ']]>';
-                        vn = replaceAll(vn, find, replace);
+//                        find = '>' + wordLength.word.zh + '<';
+//                        replace = '>' + wordLength.word.vn + '<';
+//                        vn = replaceAll(vn, find, replace);
+//                        find = '<![CDATA[' + wordLength.word.zh + ']]>';
+//                        replace = '<![CDATA[' + wordLength.word.vn + ']]>';
+//                        vn = replaceAll(vn, find, replace);
 
                         // replace both content and attribute
                         vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);

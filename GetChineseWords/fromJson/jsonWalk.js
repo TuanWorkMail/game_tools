@@ -5,7 +5,7 @@ function walkJson(json, callback) {
         for (var childNode in json) {
             if (json.hasOwnProperty(childNode)) {
 
-                walkJson(json[childNode]);
+                walkJson(json[childNode], callback);
             }
         }
     }else{

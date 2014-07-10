@@ -130,14 +130,13 @@ function main() {
             if(isChinese) {
 
                 var _string = '';
-//                            _string = wordCount + '\nw":"' + word + '"\n';
-                _string = wordCount + '\t' + word + '\n';
+//                            _string = wordCount + '\nw":"' + value + '"\n';
+                _string = wordCount + '\t' + value + '\n';
 
                 characterCount += _string.length;
                 string += _string;
 
-
-
+                util.log(wordCount);
             }
         });
 
