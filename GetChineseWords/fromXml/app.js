@@ -36,168 +36,11 @@ function initialize() {
         });
 
         alreadyReadFile = true;
-    } else main();
+    } else getChinese();
 
 }
 
 
-function replaceChineseWithVietnamese(){
-
-    walkFile(dirPath, extension, function (contents, file) {
-//        util.debug(contents);
-
-        var writeContent = contents;
-
-        // loop vietnamese words
-        for (var i = 0; i < vietnameseFiles.length; i++) {
-            var vietnameseFile = vietnameseFiles[i];
-
-            // get words from the same file path
-            if (vietnameseFile.path === getShortPath(file)) {
-
-                // word length
-                var wordLengths = [];
-
-                for (var j = 0; j < vietnameseFile.Words.length; j++) {
-                    var _word = vietnameseFile.Words[j];
-
-                    wordLengths.push({_length: _word.zh.length, word: _word});
-                }
-                // sort word length
-                function compare(a,b) {
-                    if (a._length < b._length)
-                        return 1;
-                    if (a._length > b._length)
-                        return -1;
-                    return 0;
-                }
-                wordLengths.sort(compare);
-
-                var vn = contents;
-
-                // replace the word
-                for (var j = 0; j < wordLengths.length; j++) {
-                    var wordLength = wordLengths[j];
-
-//                    util.debug(wordLength.word.zh);
-//                    util.debug(escapeRegExp(wordLength.word.zh));
-//                    util.debug(wordLength.word.vn);
-
-                    if(wordLength.word.vn !== '#N/A') {
-
-
-                        var find, replace;
-
-                        // only replace content not attribute
-//                        find = '>' + wordLength.word.zh + '<';
-//                        replace = '>' + wordLength.word.vn + '<';
-//                        vn = replaceAll(vn, find, replace);
-//                        find = '<![CDATA[' + wordLength.word.zh + ']]>';
-//                        replace = '<![CDATA[' + wordLength.word.vn + ']]>';
-//                        vn = replaceAll(vn, find, replace);
-
-                        // replace both content and attribute
-                        vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);
-                    }
-
-                }
-//                util.debug(vn);
-
-                writeContent = vn;
-
-                break;
-
-            }
-        }
-
-        createFile(dirPath+'_output'+getShortPath(file), writeContent);
-
-    });
-
-}
-
-
-function main() {
-
-    walkFile(dirPath, extension, function (contents, file) {
-
-        util.debug(getShortPath(file));
-
-        wordCount = 0;
-        var firstChineseOfFile = true;
-
-        xmlParser.parseString(contents, function (err, result) {
-
-            walkXml(result, function (word, object, property, type) {
-
-                // if end of xml file, write file to disk ONLY IN PUT MODE
-                if (word === 'EoF_EoF' && !config.getWordMode) {
-
-                    var builder = new xml2js.Builder({renderOpts: { 'pretty': true, 'indent': '  ', 'newline': '\n' }});
-                    var xml = builder.buildObject(result);
-//                    util.debug(xml);
-
-                    var xml2 = unescapeHTML(xml);
-
-                    createFile(dirPath+'_output'+getShortPath(file), xml2);
-                }
-
-                // for every word found in xml, check if chinese
-                checkChinese(word, function (isChinese) {
-
-                    if(isChinese) {
-
-                        // extract mode
-                        if (config.getWordMode) {
-
-                            if (characterCount > config.characterLimit) {
-
-                                createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-                                fileCount++;
-                                string = '';
-                                chineseFiles = [];
-
-                                characterCount = 0;
-                            }
-
-//                            if (firstChineseOfFile) {
-
-                                var shortPath = getShortPath(file);
-                                chineseFiles.push(new File(shortPath));
-
-//                                var _string = shortPath + '\n';
-                                var _string = shortPath + '\t';
-
-                                characterCount += _string.length;
-                                string += _string;
-
-                                firstChineseOfFile = false;
-//                            }
-
-                            chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
-
-//                            _string = wordCount + '\nw":"' + word + '"\n';
-                            _string = wordCount + '\t' + word + '\n';
-
-                            characterCount += _string.length;
-                            string += _string;
-
-
-                        }
-
-                    }else{
-                        if(type === 'content'){
-                            object[property] = word;
-                        }
-                    }
-                });
-            });
-        });
-        xmlParser.reset();
-    });
-
-}
 
 ////////////////////////////////////////////////////////////
 
@@ -207,7 +50,9 @@ var config = require('./config'),
     xml2js = require('xml2js'),
     xmlParser = xml2js.Parser(),
     escapeHtml = require('./escapeHtml').escapeHtml,
-    util = require('util');
+    util = require('util'),
+    replaceChineseWithVietnamese = require('./replaceChineseWithVietnamese').replaceChineseWithVietnamese,
+    getChinese = require('./getChinese').getChinese;
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -239,7 +84,6 @@ var fileWalk = require('./fileWalk'),
 
 var alreadyWords = [];
 
-initialize();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -298,3 +142,5 @@ function escapeRegExp(string) {
 function replaceAll(string, find, replace) {
     return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
+
+initialize();
