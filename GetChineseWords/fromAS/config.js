@@ -1,1 +1,1 @@
-exports.dirPath = 'D:\\MXYServer\\ESSamp\\wwwroot\\sedsds';
+exports.dirPath = 'C:\\Users\\khangthinh\\Downloads\\SWF_to_FLA';

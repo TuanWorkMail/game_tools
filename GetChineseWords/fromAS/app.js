@@ -15,12 +15,9 @@ http.listen(3000, function(){
     console.log('listening on *:3000');
 });
 
-
 var chineseFiles = [];
 
-io.on('connection', function(socket){
-
-
+function main(){
     walk(dirPath, function(err, files){
         if(err) console.log(err);
         else {
@@ -63,7 +60,9 @@ io.on('connection', function(socket){
 
         }
     });
+}
 
+io.on('connection', function(socket){
 });
 
 function ChineseFile(path){
