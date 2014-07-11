@@ -124,9 +124,7 @@ function main() {
     }
 
 
-        wordCount = 0;
 
-    walkJson(json, eachJson);
 
 }
 
@@ -145,13 +143,21 @@ function processTranslated(contents) {
         //vietnameseFiles.push({index: entries[1], vn: entries[2]});
         vietnameseFiles[entries[1]] = entries[2];
     });
+
+    wordCount = 0;
+
+    walkJson(json, eachJson);
 }
 
 var value;
+var object, property;
 
-function eachJson(_value){
+function eachJson(_value, _object, _property){
 
     value = _value;
+
+    object = _object;
+    property = _property;
 
     // for every word found in xml, check if chinese
     checkChinese(value, isChinese);
@@ -166,9 +172,13 @@ function isChinese(isChinese){
             extract();
         }
     }
+    util.log(wordCount);
 }
 function _replace(){
     //replace json then stringify
+    if(typeof vietnameseFiles[wordCount] !== 'undefined'){
+        object[property] = vietnameseFiles[wordCount];
+    } else util.debug('wordCount undefined:'+wordCount);
 }
 function extract(){
     var _string = '';
@@ -178,7 +188,6 @@ function extract(){
     characterCount += _string.length;
     string += _string;
 
-    util.log(wordCount);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -274,8 +283,11 @@ io.on('connection', function (socket) {
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
     socket.on('get chinese', function(){
 
-        createFile("D:\\json\\json" + fileCount + ".txt", string);
-
+        if(config.extractOrImport === 'import'){
+            createFile("D:\\output.json", JSON.stringify(json, undefined, 2));
+        } else {
+            createFile("D:\\json\\json" + fileCount + ".txt", string);
+        }
     });
 });
 
