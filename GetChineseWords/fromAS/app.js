@@ -28,38 +28,37 @@ function main(){
                     findChineseCharacter(contents, file);
                 });
             });
-            io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles) });
+//            io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles) });
 
             chineseFiles = [];
-
-
-            function findChineseCharacter(contents, file) {
-
-                // get all words inside " "
-                var words = contents.match(/"(.*?)"/gi);
-
-                if(!words) return;
-
-                var first = true;
-
-                for (var i = 0; i < words.length; i++) {
-                    var word = words[i];
-
-                    if (word.match(/[\u3400-\u9FBF]/)) {
-                        if(first){
-                            first = false;
-
-                            var shortPath = file.replace(dirPath,'');
-
-                            chineseFiles.push(new ChineseFile(shortPath));
-                        }
-                        chineseFiles[chineseFiles.length-1].chineseWords.push({index: i, word: word});
-                    }
-                }
-            }
-
         }
     });
+}
+main();
+
+function findChineseCharacter(contents, file) {
+
+    // get all words inside " "
+    var words = contents.match(/"(.*?)"/gi);
+
+    if(!words) return;
+
+    var first = true;
+
+    for (var i = 0; i < words.length; i++) {
+        var word = words[i];
+
+        if (word.match(/[\u3400-\u9FBF]/)) {
+            if(first){
+                first = false;
+
+                var shortPath = file.replace(dirPath,'');
+
+                chineseFiles.push(new ChineseFile(shortPath));
+            }
+            chineseFiles[chineseFiles.length-1].chineseWords.push({index: i, word: word});
+        }
+    }
 }
 
 io.on('connection', function(socket){

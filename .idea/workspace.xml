@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="replace zh with vn then write to disk">
-      <change type="DELETED" beforePath="D:\Users\VCS\game_tools_git\GetChineseWords\fromJson\models.json.js" afterPath="" />
-      <change type="DELETED" beforePath="D:\Users\VCS\game_tools_git\GetChineseWords\start.bat" afterPath="" />
+    <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="game-script.iws" />
@@ -31,17 +30,27 @@
         <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+              <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="0" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromJson/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9324727" vertical-offset="3634" max-vertical-offset="5100">
-              <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3214" max-vertical-offset="5100">
+              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,6 +61,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="2567">
               <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.1817279" vertical-offset="659" max-vertical-offset="1768">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -98,7 +117,6 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fileWalker.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fileWalking.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/checkChinese.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/xmlWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/index.html" />
@@ -106,10 +124,12 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/jsonWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/app.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromAS/config.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
       </list>
     </option>
   </component>
@@ -215,6 +235,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="fromXml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game-script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game_tools_git" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GetChineseWords" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fromAS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,19 +492,23 @@
       <created>1405066760294</created>
       <updated>1405066760294</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="move main function outside">
+      <created>1405071147033</created>
+      <updated>1405071147033</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-8" width="1873" height="1096" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32970452" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15286976" sideWeight="0.49930844" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" weight="0.17825606" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.17825606" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.34657836" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24105754" sideWeight="0.5006916" order="5" side_tool="true" content_ui="tabs" />
@@ -496,7 +538,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="filter out the &quot;#N/A&quot;" />
     <MESSAGE value="only wrap CDATA around content , not ATTRIBUTE" />
     <MESSAGE value="must remove all quote [&quot;] because attribute use quote to wrap" />
     <MESSAGE value="wrap ALL content in CDATA" />
@@ -521,7 +562,8 @@
     <MESSAGE value="read vietnamese file + refactoring" />
     <MESSAGE value="modify json walker to enable change value" />
     <MESSAGE value="replace zh with vn then write to disk" />
-    <option name="LAST_COMMIT_MESSAGE" value="replace zh with vn then write to disk" />
+    <MESSAGE value="move main function outside" />
+    <option name="LAST_COMMIT_MESSAGE" value="move main function outside" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -725,24 +767,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
-          <caret line="0" column="36" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/checkChinese.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="927">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9276596" vertical-offset="216" max-vertical-offset="1802">
-          <caret line="64" column="7" selection-start-line="64" selection-start-column="7" selection-end-line="65" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -859,10 +887,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromJson/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3214" max-vertical-offset="5100">
+          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="0" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -875,10 +919,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromJson/app.js">
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9324727" vertical-offset="3634" max-vertical-offset="5100">
-          <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.1817279" vertical-offset="659" max-vertical-offset="1768">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding />
         </state>
       </provider>
