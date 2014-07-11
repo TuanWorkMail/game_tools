@@ -5,12 +5,13 @@ function walkJson(json, callback) {
         for (var childNode in json) {
             if (json.hasOwnProperty(childNode)) {
 
-                walkJson(json[childNode], callback);
+                if(typeof json[childNode] === 'object'){
+                    walkJson(json[childNode], callback);
+                } else {
+                    callback(json[childNode], json, childNode);
+                }
             }
         }
-    }else{
-
-        callback(json);
     }
 }
 
