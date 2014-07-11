@@ -119,31 +119,66 @@ function replaceChineseWithVietnamese(){
 
 function main() {
 
+    if(config.extractOrImport === 'import'){
+        readFile(config.filePath, processTranslated);
+    }
+
 
         wordCount = 0;
 
-    walkJson(json, function(value){
+    walkJson(json, eachJson);
 
-        // for every word found in xml, check if chinese
-        checkChinese(value, function (isChinese) {
+}
 
-            if(isChinese) {
+function processTranslated(contents) {
 
-                var _string = '';
-//                            _string = wordCount + '\nw":"' + value + '"\n';
-                _string = wordCount + '\t' + value + '\n';
+//        var _contents = contents.replace('\r\n', '\n').replace('\r','');
+    var _contents = contents;
 
-                characterCount += _string.length;
-                string += _string;
+    var lines = _contents.split('\n');
 
-                util.log(wordCount);
-            }
-        });
+    lines.forEach(function (line) {
+        var entries = line.split('\t');
 
+        if (entries.length !== 3) util.debug('length !== 3');
+
+        //vietnameseFiles.push({index: entries[1], vn: entries[2]});
+        vietnameseFiles[entries[1]] = entries[2];
     });
+}
 
+var value;
 
+function eachJson(_value){
 
+    value = _value;
+
+    // for every word found in xml, check if chinese
+    checkChinese(value, isChinese);
+
+}
+
+function isChinese(isChinese){
+    if(isChinese) {
+        if(config.extractOrImport === 'import'){
+            _replace();
+        } else {
+            extract();
+        }
+    }
+}
+function _replace(){
+    //replace json then stringify
+}
+function extract(){
+    var _string = '';
+//                            _string = wordCount + '\nw":"' + value + '"\n';
+    _string = wordCount + '\t' + value + '\n';
+
+    characterCount += _string.length;
+    string += _string;
+
+    util.log(wordCount);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
