@@ -1,1 +1,1 @@
-exports.dirPath = 'C:\\Users\\khangthinh\\Downloads\\SWF_to_FLA';
+exports.dirPath = 'D:\\temp\\SWF_to_FLA';

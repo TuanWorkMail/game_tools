@@ -1,6 +1,7 @@
 var dirPath = require('./config').dirPath;
 
-var fs = require('fs');
+var fs = require('graceful-fs');
+var util = require('util');
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -8,7 +9,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-    res.sendfile('fromAS/index.html');
+    res.sendfile('./index.html');
 });
 
 http.listen(3000, function(){
@@ -25,7 +26,8 @@ function main(){
                 return file.substr(-3) == '.as';
             }).forEach(function (file) {
                 fs.readFile(file, 'utf-8', function(err, contents) {
-                    findChineseCharacter(contents, file);
+                    if(err) util.debug(err);
+                    else findChineseCharacter(contents, file);
                 });
             });
 //            io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles) });
@@ -36,7 +38,15 @@ function main(){
 }
 main();
 
+var allChineseString = '';
+
 function findChineseCharacter(contents, file) {
+
+    if(!contents){
+        util.debug('err:'+file+'='+contents);
+        return;
+    }
+    util.log(getShortPath(file));
 
     // get all words inside " "
     var words = contents.match(/"(.*?)"/gi);
@@ -52,16 +62,23 @@ function findChineseCharacter(contents, file) {
             if(first){
                 first = false;
 
-                var shortPath = file.replace(dirPath,'');
+                var shortPath = getShortPath(file);
 
                 chineseFiles.push(new ChineseFile(shortPath));
             }
             chineseFiles[chineseFiles.length-1].chineseWords.push({index: i, word: word});
+
+            allChineseString += getShortPath(file) + '\t' + i + '\t' + word + '\n';
         }
     }
 }
+// copy from fromJson
+io.on('connection', function (socket) {
+//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
+    socket.on('get chinese', function(){
 
-io.on('connection', function(socket){
+        createFile("D:\\temp\\as.txt", allChineseString);
+    });
 });
 
 function ChineseFile(path){
@@ -95,5 +112,23 @@ function walk(dir, done) {
                 }
             });
         });
+    });
+}
+
+// copy from fromJson
+function getShortPath(path){
+    return path.replace(dirPath, '');
+}
+// copy from fromJson
+function createFile(path, content){
+
+//    content = JSON.stringify(chineseFiles, undefined, 2);
+
+    fs.writeFile(path, content, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            util.log("The file "+path+" was saved!");
+        }
     });
 }
