@@ -1,4 +1,5 @@
-var dirPath = require('./config').dirPath;
+var config = require('./config'),
+    dirPath = config.dirPath;
 
 var fs = require('graceful-fs');
 var util = require('util');
@@ -9,7 +10,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 app.get('/', function(req, res){
-    res.sendfile('./index.html');
+    res.sendfile('./GetChineseWords/fromAS/index.html');
 });
 
 http.listen(3000, function(){
@@ -23,7 +24,14 @@ function main(){
         if(err) console.log(err);
         else {
             files.filter(function (file){
-                return file.substr(-3) == '.as';
+                if(config.asOrSql === 'sql'){
+                    return file.substr(-4) == '.sql';
+                } else if (config.asOrSql === 'as'){
+                    return file.substr(-3) == '.as';
+                } else {
+                    util.debug('unknown mode: as OR sql');
+                    return undefined;
+                }
             }).forEach(function (file) {
                 fs.readFile(file, 'utf-8', function(err, contents) {
                     if(err) util.debug(err);
@@ -46,17 +54,24 @@ function findChineseCharacter(contents, file) {
         util.debug('err:'+file+'='+contents);
         return;
     }
-    util.log(getShortPath(file));
 
     // get all words inside " "
-    var words = contents.match(/"(.*?)"/gi);
+    if(config.asOrSql === 'sql'){
+        var words = contents.match(/'(.*?)'/gi);
+    } else if (config.asOrSql === 'as'){
+        var words = contents.match(/"(.*?)"/gi);
+    } else {
+        util.debug('unknown mode: as OR sql');
+        return;
+    }
+
 
     if(!words) return;
 
     var first = true;
 
     for (var i = 0; i < words.length; i++) {
-        var word = words[i];
+        var word = words[i].slice(1, -1);
 
         if (word.match(/[\u3400-\u9FBF]/)) {
             if(first){
@@ -71,6 +86,7 @@ function findChineseCharacter(contents, file) {
             allChineseString += getShortPath(file) + '\t' + i + '\t' + word + '\n';
         }
     }
+    util.log(getShortPath(file));
 }
 // copy from fromJson
 io.on('connection', function (socket) {
