@@ -2,4 +2,5 @@
 
 exports.dirPath = 'D:\\temp\\sql_can_dich';
 
+exports.savePath = 'D:\\temp\\as.txt';
 exports.asOrSql = 'sql';

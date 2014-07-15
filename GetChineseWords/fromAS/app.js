@@ -4,19 +4,6 @@ var config = require('./config'),
 var fs = require('graceful-fs');
 var util = require('util');
 
-var app = require('express')();
-var http = require('http').Server(app);
-
-var io = require('socket.io')(http);
-
-app.get('/', function(req, res){
-    res.sendfile('./GetChineseWords/fromAS/index.html');
-});
-
-http.listen(3000, function(){
-    console.log('listening on *:3000');
-});
-
 var chineseFiles = [];
 
 function main(){
@@ -73,6 +60,8 @@ function findChineseCharacter(contents, file) {
     for (var i = 0; i < words.length; i++) {
         var word = words[i].slice(1, -1);
 
+        walkCharacter(word);
+
         if (word.match(/[\u3400-\u9FBF]/)) {
             if(first){
                 first = false;
@@ -88,14 +77,32 @@ function findChineseCharacter(contents, file) {
     }
     util.log(getShortPath(file));
 }
-// copy from fromJson
-io.on('connection', function (socket) {
-//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
-    socket.on('get chinese', function(){
 
-        createFile("D:\\temp\\as.txt", allChineseString);
-    });
-});
+function walkCharacter(word, callback){
+    for (var i = 0; i < word.length; i++) {
+        var character = word[i];
+
+        callback(character);
+    }
+}
+
+var zhCharacters = [];
+
+function getZhCharacter(character){
+    if (character.match(/[\u3400-\u9FBF]/)) {
+        if(first){
+            first = false;
+
+            var shortPath = getShortPath(file);
+
+            chineseFiles.push(new ChineseFile(shortPath));
+        }
+        chineseFiles[chineseFiles.length-1].chineseWords.push({index: i, word: word});
+
+        allChineseString += getShortPath(file) + '\t' + i + '\t' + word + '\n';
+    } else {}
+}
+
 
 function ChineseFile(path){
     var chineseWords = [];
@@ -134,17 +141,4 @@ function walk(dir, done) {
 // copy from fromJson
 function getShortPath(path){
     return path.replace(dirPath, '');
-}
-// copy from fromJson
-function createFile(path, content){
-
-//    content = JSON.stringify(chineseFiles, undefined, 2);
-
-    fs.writeFile(path, content, function(err) {
-        if(err) {
-            console.log(err);
-        } else {
-            util.log("The file "+path+" was saved!");
-        }
-    });
 }
