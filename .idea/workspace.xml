@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="add sql extract">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GetChineseWords/js/webServer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromAS/config.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromAS/config.js" />
+      <change type="DELETED" beforePath="D:\Users\VCS\game_tools_git\GetChineseWords\GetChineseWords.bat" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/main.js" afterPath="$PROJECT_DIR$/GetChineseWords/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="game-script.iws" />
@@ -31,9 +31,21 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5024827" vertical-offset="0" max-vertical-offset="2567">
-              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="91" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.67527306" vertical-offset="0" max-vertical-offset="3740">
+              <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="getChinese.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+              <caret line="84" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!block;n#getChinese#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,15 +96,16 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/jsonWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/app.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/index.html" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/js/webServer.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/GetChineseWords.bat" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       </list>
     </option>
   </component>
@@ -150,7 +163,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -221,6 +233,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,6 +268,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\VCS\game_tools_git\GetChineseWords" />
       <recent name="D:\Users\VCS\game-tools\GetChineseWords\fromXml" />
     </key>
   </component>
@@ -273,6 +287,14 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -283,12 +305,14 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
+    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" />
+      <option name="executablePath" />
       <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -296,16 +320,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaScriptRunConfigurationType" factoryName="Cucumber.js">
-      <option name="cucumberJsArguments" />
-      <option name="executablePath" />
-      <option name="filePath" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -478,11 +492,9 @@
     <frame x="55" y="-8" width="1873" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32970452" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.41370967" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15286976" sideWeight="0.4985507" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.21357615" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.48730683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -492,10 +504,12 @@
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32970452" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.41370967" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -546,13 +560,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="302" max-vertical-offset="1734">
-          <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/StarSilverAdjust.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1887">
@@ -833,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5198777" vertical-offset="0" max-vertical-offset="981">
           <caret line="30" column="71" selection-start-line="0" selection-start-column="0" selection-end-line="41" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,26 +859,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08440913" vertical-offset="0" max-vertical-offset="1007">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromJson/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34160873" vertical-offset="4093" max-vertical-offset="5100">
           <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42204568" vertical-offset="0" max-vertical-offset="1547">
-          <caret line="25" column="61" selection-start-line="25" selection-start-column="49" selection-end-line="25" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -889,7 +879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06752731" vertical-offset="0" max-vertical-offset="1007">
           <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -905,14 +894,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4389275" vertical-offset="0" max-vertical-offset="1007">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.016881827" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="153">
+          <caret line="84" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!block;n#getChinese#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5024827" vertical-offset="0" max-vertical-offset="2567">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="91" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.67527306" vertical-offset="0" max-vertical-offset="3740">
+          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
           <folding />
         </state>
       </provider>
