@@ -13,10 +13,7 @@ function initialize() {
 
 function parseFile(contents) {
 
-//        var _contents = contents.replace('\r\n', '\n').replace('\r','');
-    var _contents = contents;
-
-    var lines = _contents.split('\n');
+    var lines = contents.split('\n');
 
     lines.forEach(parseLine);
 
@@ -51,21 +48,33 @@ function getChinese() {
 
 }
 
-function parseFile2(contents, file) {
+var firstChineseOfFile = true;
+var file;
+
+function parseFile2(contents, _file) {
+
+    file = _file;
 
     util.debug(getShortPath(file));
 
     wordCount = 0;
-    var firstChineseOfFile = true;
+    firstChineseOfFile = true;
 
     xmlParser.parseString(contents, parseXmlFile);
     xmlParser.reset();
 }
 
+var word, object, property, type;
+
 function parseXmlFile(err, result) {
 
     if(err) util.debug(err);
-    else walkXml(result, function (word, object, property, type) {
+    else walkXml(result, function (_word, _object, _property, _type) {
+
+        word = _word;
+        object = _object;
+        property = _property;
+        type = _type;
 
         // for every word found in xml, check if chinese
         checkChinese(word, isChinese);
@@ -130,6 +139,7 @@ var config = require('./config'),
 
 var app = require('express')();
 var http = require('http').Server(app);
+app.get = app.get || 'webStorm sucked';
 app.get('/', function (req, res) {
     res.sendfile('./fromXml/index.html');
 });
@@ -155,8 +165,6 @@ var fileWalk = require('./fileWalk'),
     walkFile = fileWalk._walk,
     readFile = fileWalk.readFile,
     walkXml = require('./xmlWalk').walkXml;
-
-var alreadyWords = [];
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +194,7 @@ function createFile(path, content){
         }
     });
 }
-
+io.on = io.on || 'webStorm sucked';
 io.on('connection', function (socket) {
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
     socket.on('get chinese', function(){

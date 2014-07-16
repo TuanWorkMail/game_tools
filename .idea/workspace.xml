@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="add sql extract">
-      <change type="DELETED" beforePath="D:\Users\VCS\game_tools_git\GetChineseWords\GetChineseWords.bat" afterPath="" />
+    <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="">
+      <change type="DELETED" beforePath="D:\Users\VCS\game_tools_git\GetChineseWords.bat" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/main.js" afterPath="$PROJECT_DIR$/GetChineseWords/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="game-script.iws" />
@@ -31,8 +30,18 @@
       <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.67527306" vertical-offset="0" max-vertical-offset="3740">
-              <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+            <state vertical-scroll-proportion="1.6246276" vertical-offset="2053" max-vertical-offset="3876">
+              <caret line="217" column="0" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="replaceChineseWithVietnamese.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
+              <caret line="76" column="68" selection-start-line="76" selection-start-column="68" selection-end-line="76" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -94,7 +103,6 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/fileWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/index.html" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/config.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/jsonWalk.js" />
@@ -105,6 +113,7 @@
         <option value="$PROJECT_DIR$/GetChineseWords/js/webServer.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/GetChineseWords.bat" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
       </list>
     </option>
@@ -485,16 +494,22 @@
       <created>1405306243375</created>
       <updated>1405306243375</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="refactoring - not working">
+      <created>1405478659713</created>
+      <updated>1405478659713</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-8" width="1873" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32970452" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.41370967" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15286976" sideWeight="0.4985507" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.21357615" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.48730683" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -504,9 +519,7 @@
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32970452" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.41370967" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -527,7 +540,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="wrap ALL content in CDATA" />
     <MESSAGE value="wrap ALL content in CDATA [fixed]" />
     <MESSAGE value="change from parse xml to replace word" />
     <MESSAGE value="change from parse xml to replace word&#10;&#10;YEAH FUCKING DONE IT MOTHERFUCKER" />
@@ -552,7 +564,8 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="change to graceful-fs to avoid &quot;too many file opened&quot; error&#10;add some error catching&#10;output to txt not html anymore&#10;" />
     <MESSAGE value="add sql extract" />
-    <option name="LAST_COMMIT_MESSAGE" value="add sql extract" />
+    <MESSAGE value="refactoring - not working" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring - not working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -807,14 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91344196" vertical-offset="395" max-vertical-offset="1394">
-          <caret line="76" column="68" selection-start-line="76" selection-start-column="68" selection-end-line="76" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromJson/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1007">
@@ -915,10 +920,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="1394">
+          <caret line="76" column="68" selection-start-line="76" selection-start-column="68" selection-end-line="76" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67527306" vertical-offset="0" max-vertical-offset="3740">
-          <caret line="40" column="12" selection-start-line="40" selection-start-column="12" selection-end-line="40" selection-end-column="12" />
+        <state vertical-scroll-proportion="1.6246276" vertical-offset="2053" max-vertical-offset="3876">
+          <caret line="217" column="0" selection-start-line="217" selection-start-column="0" selection-end-line="217" selection-end-column="0" />
           <folding />
         </state>
       </provider>
