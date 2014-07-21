@@ -7,31 +7,34 @@ var util = require('util');
 var chineseFiles = [];
 
 function main(){
-    walk(dirPath, function(err, files){
-        if(err) console.log(err);
-        else {
-            files.filter(function (file){
-                if(config.asOrSql === 'sql'){
-                    return file.substr(-4) == '.sql';
-                } else if (config.asOrSql === 'as'){
-                    return file.substr(-3) == '.as';
-                } else {
-                    util.debug('unknown mode: as OR sql');
-                    return undefined;
-                }
-            }).forEach(function (file) {
-                fs.readFile(file, 'utf-8', function(err, contents) {
-                    if(err) util.debug(err);
-                    else findChineseCharacter(contents, file);
-                });
-            });
-//            io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles) });
-
-            chineseFiles = [];
-        }
-    });
+    walk(dirPath, eachFile);
 }
 main();
+function eachFile(err, files){
+    if(err) console.log(err);
+    else {
+        files.filter(filterFileExtension).forEach(_readFile);
+//            io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles) });
+
+        chineseFiles = [];
+    }
+}
+function filterFileExtension(file){
+    if(config.asOrSql === 'sql'){
+        return file.substr(-4) == '.sql';
+    } else if (config.asOrSql === 'as'){
+        return file.substr(-3) == '.as';
+    } else {
+        util.debug('unknown mode: as OR sql');
+        return undefined;
+    }
+}
+function _readFile(file) {
+    fs.readFile(file, 'utf-8', function processFile(err, contents) {
+        if(err) util.debug(err);
+        else findChineseCharacter(contents, file);
+    });
+}
 
 var allChineseString = '';
 
@@ -46,7 +49,7 @@ function findChineseCharacter(contents, file) {
     if(config.asOrSql === 'sql'){
         var words = contents.match(/'(.*?)'/gi);
     } else if (config.asOrSql === 'as'){
-        var words = contents.match(/"(.*?)"/gi);
+        words = contents.match(/"(.*?)"/gi);
     } else {
         util.debug('unknown mode: as OR sql');
         return;
@@ -60,7 +63,7 @@ function findChineseCharacter(contents, file) {
     for (var i = 0; i < words.length; i++) {
         var word = words[i].slice(1, -1);
 
-        walkCharacter(word);
+//        walkCharacter(word);
 
         if (word.match(/[\u3400-\u9FBF]/)) {
             if(first){

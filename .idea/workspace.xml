@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d434330-8798-4366-990d-728bafbdb0b0" name="Default" comment="copy to other file create lots of error, at least 2 files">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DropRate/sync/PropConfig.js" afterPath="$PROJECT_DIR$/DropRate/sync/PropConfig.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DropRate/sync/Sync.html" afterPath="$PROJECT_DIR$/DropRate/sync/Sync.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/main.js" afterPath="$PROJECT_DIR$/GetChineseWords/main.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/utility.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" afterPath="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="game-script.iws" />
@@ -28,55 +29,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
+      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1441" max-vertical-offset="2499">
-              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.26046985" vertical-offset="0" max-vertical-offset="2584">
+              <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="replaceChineseWithVietnamese.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1292" max-vertical-offset="1394">
-              <caret line="76" column="68" selection-start-line="76" selection-start-column="68" selection-end-line="76" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getChinese.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.08440913" vertical-offset="0" max-vertical-offset="1007">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DropRate/dropRateAdjust/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="6239">
-              <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-              <folding>
-                <marker date="1402281723069" expanded="false" signature="8738:8749" placeholder="..." />
-                <marker date="1402281723069" expanded="false" signature="8866:8877" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -129,15 +97,16 @@
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/jsonWalk.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromJson/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/index.html" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromAS/config.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/js/webServer.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/GetChineseWords.bat" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
-        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
         <option value="$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js" />
         <option value="$PROJECT_DIR$/DropRate/sync/Sync.html" />
         <option value="$PROJECT_DIR$/GetChineseWords/main.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/app.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/utility.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js" />
+        <option value="$PROJECT_DIR$/GetChineseWords/fromAS/app.js" />
       </list>
     </option>
   </component>
@@ -224,6 +193,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GetChineseWords" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game-script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="game_tools_git" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GetChineseWords" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fromAS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -569,21 +556,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/DropRate/sync/Sync.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="442" max-vertical-offset="3757">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DropRate/dropRateAdjust/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="6239">
           <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
           <folding>
-            <marker date="1402281723069" expanded="false" signature="8738:8749" placeholder="..." />
-            <marker date="1402281723069" expanded="false" signature="8866:8877" placeholder="..." />
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -625,8 +604,8 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="6239">
           <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
           <folding>
-            <marker date="1402281723069" expanded="false" signature="8738:8749" placeholder="..." />
-            <marker date="1402281723069" expanded="false" signature="8866:8877" placeholder="..." />
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -799,13 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06924643" vertical-offset="0" max-vertical-offset="982">
-          <caret line="4" column="26" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/walkDirectory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.72708756" vertical-offset="0" max-vertical-offset="1275">
@@ -869,40 +841,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06752731" vertical-offset="0" max-vertical-offset="1007">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2533">
-          <caret line="114" column="9" selection-start-line="114" selection-start-column="9" selection-end-line="114" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/js/webServer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4389275" vertical-offset="0" max-vertical-offset="1007">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="387" max-vertical-offset="1394">
-          <caret line="76" column="68" selection-start-line="76" selection-start-column="68" selection-end-line="76" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1492" max-vertical-offset="2499">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -914,17 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DropRate/dropRateAdjust/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="58" max-vertical-offset="6239">
-          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding>
-            <marker date="1402281723069" expanded="false" signature="8738:8749" placeholder="..." />
-            <marker date="1402281723069" expanded="false" signature="8866:8877" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DropRate/sync/Sync.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.53720695" vertical-offset="1428" max-vertical-offset="3757">
@@ -933,18 +864,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/DropRate/dropRateAdjust/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2650356" vertical-offset="0" max-vertical-offset="6239">
+          <caret line="73" column="45" selection-start-line="73" selection-start-column="45" selection-end-line="73" selection-end-column="45" />
+          <folding>
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1402281723069" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/getChinese.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
+        <state vertical-scroll-proportion="0.20258193" vertical-offset="0" max-vertical-offset="1530">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/utility.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27010924" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.80898875" vertical-offset="891" max-vertical-offset="2125">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/replaceChineseWithVietnamese.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03773585" vertical-offset="778" max-vertical-offset="1785">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GetChineseWords/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08440913" vertical-offset="0" max-vertical-offset="1007">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.06752731" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromXml/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10129096" vertical-offset="0" max-vertical-offset="1007">
+          <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GetChineseWords/fromAS/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26046985" vertical-offset="0" max-vertical-offset="2584">
+          <caret line="15" column="61" selection-start-line="15" selection-start-column="61" selection-end-line="15" selection-end-column="61" />
           <folding />
         </state>
       </provider>

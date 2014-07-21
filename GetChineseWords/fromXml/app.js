@@ -19,7 +19,7 @@ function parseFile(contents) {
 
 //        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
 
-    replaceChineseWithVietnamese();
+    replaceChineseWithVietnamese(vietnameseFiles);
 }
 
 function parseLine(line) {
@@ -52,9 +52,9 @@ var config = require('./config'),
     xml2js = require('xml2js'),
     xmlParser = xml2js.Parser(),
     escapeHtml = require('./escapeHtml').escapeHtml,
-    util = require('util'),
-//    getChinese = require('./getChinese').getChinese,
-    replaceChineseWithVietnamese = require('./replaceChineseWithVietnamese').replaceChineseWithVietnamese;
+    util = require('util');
+//var getChinese = require('./getChinese').getChinese;
+var replaceChineseWithVietnamese = require('./replaceChineseWithVietnamese').replaceChineseWithVietnamese;
 
 var app = require('express')();
 var http = require('http').Server(app);
@@ -88,9 +88,6 @@ var fileWalk = require('./fileWalk'),
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function getShortPath(path){
-    return path.replace(dirPath, '');
-}
 
 function checkChinese(word, callback) {
 
@@ -101,18 +98,6 @@ function checkChinese(word, callback) {
     wordCount++;
 }
 
-function createFile(path, content){
-
-//    content = JSON.stringify(chineseFiles, undefined, 2);
-
-    fs.writeFile(path, content, function(err) {
-        if(err) {
-            console.log(err);
-        } else {
-            util.log("The file "+path+" was saved!");
-        }
-    });
-}
 io.on = io.on || 'webStorm sucked';
 io.on('connection', function (socket) {
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
@@ -131,12 +116,5 @@ function File(path) {
     }
 }
 
-function escapeRegExp(string) {
-    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-}
-
-function replaceAll(string, find, replace) {
-    return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-}
 
 initialize();
