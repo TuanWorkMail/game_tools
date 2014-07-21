@@ -1,1 +1,3 @@
 node_modules
+/GetChineseWords/fromJson/models.json.js
+/GetChineseWords/fromJson/test.json.js
