@@ -4,6 +4,19 @@ var config = require('./config'),
 var fs = require('graceful-fs');
 var util = require('util');
 
+var app = require('express')();
+var http = require('http').Server(app);
+
+var io = require('socket.io')(http);
+
+app.get('/', function(req, res){
+    res.sendfile('./fromAS/index.html');
+});
+
+http.listen(3000, function(){
+    console.log('listening on *:3000');
+});
+
 var chineseFiles = [];
 
 function main(){
@@ -80,14 +93,18 @@ function findChineseCharacter(contents, file) {
     }
     util.log(getShortPath(file));
 }
+// copy from fromJson
+io.on('connection', function (socket) {
+//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
+    socket.on('get chinese', function(){
 
-function walkCharacter(word, callback){
-    for (var i = 0; i < word.length; i++) {
-        var character = word[i];
+        createFile("D:\\temp\\as.txt", allChineseString);
+    });
+});
 
-        callback(character);
-    }
-}
+//        callback(character);
+//    }
+//}
 
 var zhCharacters = [];
 
@@ -144,4 +161,17 @@ function walk(dir, done) {
 // copy from fromJson
 function getShortPath(path){
     return path.replace(dirPath, '');
+}
+// copy from fromJson
+function createFile(path, content){
+
+//    content = JSON.stringify(chineseFiles, undefined, 2);
+
+    fs.writeFile(path, content, function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            util.log("The file "+path+" was saved!");
+        }
+    });
 }
