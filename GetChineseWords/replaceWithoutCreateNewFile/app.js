@@ -49,9 +49,6 @@ function parseLine(line) {
 var config = require('./config'),
     dirPath = config.dirPath,
     extension = config.extension,
-    xml2js = require('xml2js'),
-    xmlParser = xml2js.Parser(),
-    escapeHtml = require('./escapeHtml').escapeHtml,
     util = require('util');
 //var getChinese = require('./getChinese').getChinese;
 var replaceChineseWithVietnamese = require('./replaceChineseWithVietnamese').replaceChineseWithVietnamese;
