@@ -1,7 +1,6 @@
 function initialize() {
 
 // read file only once
-    if (!config.getWordMode) {
 
         readFile(config.filePath, function (contents) {
 
@@ -36,7 +35,6 @@ function initialize() {
         });
 
         alreadyReadFile = true;
-    } else main();
 
 }
 
@@ -117,88 +115,6 @@ function replaceChineseWithVietnamese(){
 }
 
 
-function main() {
-
-    walkFile(dirPath, extension, function (contents, file) {
-
-        util.debug(getShortPath(file));
-
-        wordCount = 0;
-        var firstChineseOfFile = true;
-
-        xmlParser.parseString(contents, function (err, result) {
-
-            walkXml(result, function (word, object, property, type) {
-
-                // if end of xml file, write file to disk ONLY IN PUT MODE
-                if (word === 'EoF_EoF' && !config.getWordMode) {
-
-                    var builder = new xml2js.Builder({renderOpts: { 'pretty': true, 'indent': '  ', 'newline': '\n' }});
-                    var xml = builder.buildObject(result);
-//                    util.debug(xml);
-
-                    var xml2 = unescapeHTML(xml);
-
-                    createFile(dirPath+'_output'+getShortPath(file), xml2);
-                }
-
-                // for every word found in xml, check if chinese
-                checkChinese(word, function (isChinese) {
-
-                    if(isChinese) {
-
-                        // extract mode
-                        if (config.getWordMode) {
-
-                            if (characterCount > config.characterLimit) {
-
-                                createFile("D:\\json\\json" + fileCount + ".txt", string);
-
-                                fileCount++;
-                                string = '';
-                                chineseFiles = [];
-
-                                characterCount = 0;
-                            }
-
-//                            if (firstChineseOfFile) {
-
-                                var shortPath = getShortPath(file);
-                                chineseFiles.push(new File(shortPath));
-
-//                                var _string = shortPath + '\n';
-                                var _string = shortPath + '\t';
-
-                                characterCount += _string.length;
-                                string += _string;
-
-                                firstChineseOfFile = false;
-//                            }
-
-                            chineseFiles[chineseFiles.length - 1].Words.push({i: wordCount, w: escapeHtml(word)});
-
-//                            _string = wordCount + '\nw":"' + word + '"\n';
-                            _string = wordCount + '\t' + word + '\n';
-
-                            characterCount += _string.length;
-                            string += _string;
-
-
-                        }
-
-                    }else{
-                        if(type === 'content'){
-                            object[property] = word;
-                        }
-                    }
-                });
-            });
-        });
-        xmlParser.reset();
-    });
-
-}
-
 ////////////////////////////////////////////////////////////
 
 var config = require('./config'),
@@ -206,7 +122,6 @@ var config = require('./config'),
     extension = config.extension,
     xml2js = require('xml2js'),
     xmlParser = xml2js.Parser(),
-    escapeHtml = require('./escapeHtml').escapeHtml,
     util = require('util');
 
 var app = require('express')();
@@ -234,8 +149,7 @@ var alreadyReadFile = false,
 
 var fileWalk = require('./fileWalk'),
     walkFile = fileWalk._walk,
-    readFile = fileWalk.readFile,
-    walkXml = require('./xmlWalk').walkXml;
+    readFile = fileWalk.readFile;
 
 var alreadyWords = [];
 
