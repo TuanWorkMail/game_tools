@@ -1,6 +1,6 @@
-exports.dirPath = 'D:\\tdnn';
-exports.filePath = 'D:\\tdnn_dich.txt';
-exports.extension = '.xml';
+exports.dirPath = 'D:\\temp\\sql_can_dich';
+exports.filePath = 'D:\\temp\\sqlVn_7-31.txt';
+exports.extension = '.sql';
 exports.mode = 'excel';
 exports.getWordMode = true;
 //exports.characterLimit = 12000;
