@@ -24,7 +24,8 @@ function initialize() {
                     var entry = entries[i];
                     string += i + ':' + entry + ';';
                 }
-                util.debug('length!==5::' + string);
+                util.error('length!==5::' + string);
+                return;
             }
 
             // REMEMBER TO SORT THE EXCEL FILE FIRST
@@ -90,7 +91,7 @@ function replaceChineseWithVietnamese() {
 
                         if (!vn.match(new RegExp(escapeRegExp("'" + wordLength.zh + "'"), 'g'))) log += 'not found:' + wordLength.zh + '\n';
 
-                        if (wordLength.vn !== '#N/A') {
+                        if (wordLength.vn !== '#N/A' && wordLength.vn != 0) {
 
                             var find, replace;
 
@@ -124,7 +125,7 @@ function replaceChineseWithVietnamese() {
 
         // eg: d:\temp\webSql.sql_output
         createFile(file + '_output', writeContent);
-        createFile(file + '_log', log); 
+        createFile(file + '_log', log);
 
     });
 
