@@ -4,6 +4,6 @@
 
 //require('./fromAS/app');
 
-//require('./fromJson/app');
+require('./fromJson/app');
 
-require('./replaceWithoutCreateNewFile/app');
+//require('./replaceWithoutCreateNewFile/app');

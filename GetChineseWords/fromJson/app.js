@@ -13,7 +13,10 @@ function initialize() {
             lines.forEach(function (line) {
                 var entries = line.split('\t');
 
-                if (entries.length !== 4) util.debug('length !== 4');
+                if (entries.length !== 4) {
+                    util.debug('length !== 4');
+                    return;
+                }
 
                 // REMEMBER TO SORT THE EXCEL FILE FIRST
                 // if array is empty OR if current path is different from the last path
@@ -284,9 +287,9 @@ io.on('connection', function (socket) {
     socket.on('get chinese', function(){
 
         if(config.extractOrImport === 'import'){
-            createFile("D:\\output.json", JSON.stringify(json, undefined, 2));
+            createFile("D:\\temp\\output.json", JSON.stringify(json, undefined, 2));
         } else {
-            createFile("D:\\json\\json" + fileCount + ".txt", string);
+            createFile("D:\\temp\\json\\json" + fileCount + ".txt", string);
         }
     });
 });

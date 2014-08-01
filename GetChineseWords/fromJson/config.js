@@ -1,4 +1,4 @@
-exports.filePath = 'D:\\daiTamQuoc.txt';
+exports.filePath = 'D:\\temp\\daiTamQuoc.txt';
 exports.mode = 'excel';
 exports.getWordMode = true;
 //exports.characterLimit = 12000;
