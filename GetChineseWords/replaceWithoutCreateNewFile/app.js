@@ -12,28 +12,37 @@ function initialize() {
         lines.forEach(function (line) {
             var entries = line.split('\t');
 
-            if (entries.length !== 4) {
+            var path = entries[0],
+                lineNumber = entries[1],
+                wordCount = entries[2],
+                chinese = entries[3],
+                vietnamese = entries[4];
+
+            if (entries.length !== 5) {
                 var string = '';
                 for (var i = 0; i < entries.length; i++) {
                     var entry = entries[i];
                     string += i + ':' + entry + ';';
                 }
-                util.debug('length!==4::' + string);
+                util.debug('length!==5::' + string);
             }
 
             // REMEMBER TO SORT THE EXCEL FILE FIRST
             // if array is empty OR if current path is different from the last path
-            if (vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length - 1].path !== entries[0]) {
-                vietnameseFiles.push(new File(entries[0]));
+            if (vietnameseFiles.length === 0 || vietnameseFiles[vietnameseFiles.length - 1].path !== path) {
+                vietnameseFiles.push( { path: path, lines: [] } );
             }
-            if (typeof entries[3] !== 'undefined') {
-                var word = entries[3];
-                var word2 = word.replace(/\r/g, '');
+            // if line number is different, create new
+            if (typeof vietnameseFiles[vietnameseFiles.length - 1].lines[lineNumber] === 'undefined') {
+                vietnameseFiles[vietnameseFiles.length - 1].lines[lineNumber] = { Words: [] } ;
+            }
+            if (typeof vietnamese !== 'undefined') {
+                var word2 = vietnamese.replace(/\r/g, '');
             } else {
-                word2 = entries[3];
+                word2 = vietnamese;
             }
 
-            vietnameseFiles[vietnameseFiles.length - 1].Words.push({i: entries[1], zh: entries[2], vn: word2});
+            vietnameseFiles[vietnameseFiles.length - 1].lines[lineNumber].Words.push({i: wordCount, zh: chinese, vn: word2});
         });
 
 //        util.debug(JSON.stringify(vietnameseFiles, undefined, 2));
@@ -62,36 +71,28 @@ function replaceChineseWithVietnamese() {
             // get words from the same file path
             if (vietnameseFile.path === getShortPath(file)) {
 
-                // word length
-                var wordLengths = [];
+                var allLines = '';
 
-                for (var j = 0; j < vietnameseFile.Words.length; j++) {
-                    var _word = vietnameseFile.Words[j];
+                // split line of chinese file to replace line by line
+                var lines = contents.split('\n');
+                for (var k = 0; k < lines.length; k++) {
+                    var vn = lines[k];
 
-                    wordLengths.push({_length: _word.zh.length, word: _word});
-                }
-                // sort word length
-                function compare(a, b) {
-                    if (a._length < b._length)
-                        return 1;
-                    if (a._length > b._length)
-                        return -1;
-                    return 0;
-                }
+                    if(typeof vietnameseFile.lines[k] === 'undefined') {
 
-                wordLengths.sort(compare);
+                        allLines += vn;
+                        continue;
+                    }
 
-                var vn = contents;
+                    // replace the word
+                    for (var j = 0; j < vietnameseFile.lines[k].Words.length; j++) {
+                        var wordLength = vietnameseFile.lines[k].Words[j];
 
-                // replace the word
-                for (var j = 0; j < wordLengths.length; j++) {
-                    var wordLength = wordLengths[j];
+                        if (!vn.match(new RegExp(escapeRegExp("'" + wordLength.zh + "'"), 'g'))) log += 'not found:' + wordLength.zh + '\n';
 
-                    if (!vn.match(new RegExp(escapeRegExp(wordLength.word.zh), 'g'))) log += 'not found:' + wordLength.word.zh + '\n';
+                        if (wordLength.vn !== '#N/A') {
 
-                    if (wordLength.word.vn !== '#N/A') {
-
-                        var find, replace;
+                            var find, replace;
 
 //                        // only replace content not attribute
 //                        find = '>' + wordLength.word.zh + '<';
@@ -101,20 +102,20 @@ function replaceChineseWithVietnamese() {
 //                        replace = '<![CDATA[' + wordLength.word.vn + ']]>';
 //                        vn = replaceAll(vn, find, replace);
 
-                        // replace sql string
-                        find = wordLength.word.zh;
-                        replace = wordLength.word.vn;
-                        vn = replaceAll(vn, find, replace);
+                            // replace sql string
+                            find = "'" + wordLength.zh + "'";
+                            replace = "'" + wordLength.vn + "'";
+                            vn = replaceAll(vn, find, replace);
 
 //                        vn = replaceAll(vn, wordLength.word.zh, wordLength.word.vn);
 
-                    } else util.debug('#N/A:'+wordLength.word.zh);
-
-                    printProcess(j/wordLengths.length*100);
+                        } else util.debug('#N/A:'+wordLength.zh);
+                    }
+                    allLines += vn;
+                    printProcess(k/lines.length*100);
                 }
-//                util.debug(vn);
 
-                writeContent = vn;
+                writeContent = allLines;
 
                 break;
 
@@ -123,7 +124,7 @@ function replaceChineseWithVietnamese() {
 
         // eg: d:\temp\webSql.sql_output
         createFile(file + '_output', writeContent);
-        createFile(file + '_log', log);
+        createFile(file + '_log', log); 
 
     });
 
