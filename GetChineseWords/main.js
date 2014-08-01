@@ -2,8 +2,8 @@
 
 //require('./listCDATA/app');
 
-//require('./fromAS/app');
+require('./fromAS/app');
 
 //require('./fromJson/app');
 
-require('./replaceWithoutCreateNewFile/app');
+//require('./replaceWithoutCreateNewFile/app');

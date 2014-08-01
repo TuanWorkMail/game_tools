@@ -58,37 +58,46 @@ function findChineseCharacter(contents, file) {
         return;
     }
 
-    // get all words inside " "
-    if(config.asOrSql === 'sql'){
-        var words = contents.match(/'(.*?)'/gi);
-    } else if (config.asOrSql === 'as'){
-        words = contents.match(/"(.*?)"/gi);
-    } else {
-        util.debug('unknown mode: as OR sql');
-        return;
-    }
+    var lines = contents.split('\n');
+
+    var wordCount = 0;
+
+    var firstInFile = true;
+
+    for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+
+        // get all words inside " "
+        if(config.asOrSql === 'sql'){
+            var words = line.match(/'(.*?)'/gi);
+        } else if (config.asOrSql === 'as'){
+            words = line.match(/"(.*?)"/gi);
+        } else {
+            util.debug('unknown mode: as OR sql');
+            return;
+        }
+
+        if(!words) continue;
 
 
-    if(!words) return;
-
-    var first = true;
-
-    for (var i = 0; i < words.length; i++) {
-        var word = words[i].slice(1, -1);
+        for (var j = 0; j < words.length; j++) {
+            var word = words[j].slice(1, -1);
 
 //        walkCharacter(word);
 
-        if (word.match(/[\u3400-\u9FBF]/)) {
-            if(first){
-                first = false;
+            if (word.match(/[\u3400-\u9FBF]/)) {
+//                if(firstInFile){
+//                    firstInFile = false;
+//
+//                    var shortPath = getShortPath(file);
+//
+//                    chineseFiles.push(new ChineseFile(shortPath));
+//                }
+//                chineseFiles[chineseFiles.length-1].chineseWords.push({index: wordCount, word: word});
 
-                var shortPath = getShortPath(file);
-
-                chineseFiles.push(new ChineseFile(shortPath));
+                allChineseString += getShortPath(file) + '\t' + i + '\t' + wordCount + '\t' + word + '\n';
             }
-            chineseFiles[chineseFiles.length-1].chineseWords.push({index: i, word: word});
-
-            allChineseString += getShortPath(file) + '\t' + i + '\t' + word + '\n';
+            wordCount++;
         }
     }
     util.log(getShortPath(file));
