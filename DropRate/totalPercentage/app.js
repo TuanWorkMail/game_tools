@@ -14,7 +14,7 @@ function parseFile(contents) {
     for (var j = 0; j < json.length; j++) {
         var jsonElement = json[j];
 
-        if(typeof jsonElement.serialNums !== 'undefined' && jsonElement.serialNums.match('30000')) {
+        if(typeof jsonElement.serialNums !== 'undefined' && jsonElement.serialNums.match(config.serialNums)) {
 
             // get total rate of each rewardNo of 1 item
             if(rewardNo_rate.length === 0) rewardNo_rate.push( { rewardNo: jsonElement.rewardNo, rate: jsonElement.rate, totalRate: 0, count: 1 } );
@@ -54,7 +54,7 @@ function parseFile(contents) {
     //calculate percentage
     rewardNo_rate.forEach(function eachRewardNo_rate(_rewardNo_rate){
 
-        rewardNo_percentage.push( { rewardNo: _rewardNo_rate.rewardNo, percentage: Math.round(_rewardNo_rate.rate/_rewardNo_rate.totalRate*100), count: _rewardNo_rate.count } )
+        rewardNo_percentage.push( { rewardNo: _rewardNo_rate.rewardNo, percentage: +(_rewardNo_rate.rate/_rewardNo_rate.totalRate*100).toFixed(2), count: _rewardNo_rate.count } )
     });
 
     console.log(rewardNo_percentage);
