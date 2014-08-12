@@ -1,33 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <style>
-        html, body {
-            height: 100%;
-        }
-    </style>
-</head>
-<body>
-json=<span id="countJson"></span><br/>
-DataBase=<span id="countDatabase"></span><br/>
-<input type="button" value="output swf" onclick="outputSwf()">
-<input type="button" value="output json except name" onclick="outputJson(true)">
-<input type="button" value="output json compare all" onclick="outputJson(false)">
-<br/>
-<span id="new"></span>
-<br/>
-<span id="missing"></span>
-<br/>
-<textarea style="width:100%;height:100%" id="output">output</textarea>
+function initialize() {
 
-<script src="jquery-1.10.2.js"></script>
-<script src="PropConfig.js"></script>
-<!--<script src="MallConfig.js"></script>-->
-<!--<script src="AchieveConfig.js"></script>-->
+    readFile(config.filePath, parseFile);
+}
 
-<script>
+function parseFile() {
 
     var lastKey;
 
@@ -54,7 +30,7 @@ DataBase=<span id="countDatabase"></span><br/>
             return;
         }
 
-        var html = '[{\n';
+        var html = '[{<br/>';
 
         for (var j = 0; j < json.length; j++) {
 
@@ -84,7 +60,7 @@ DataBase=<span id="countDatabase"></span><br/>
                         break;
                     }
                     if (key == lastKey) {
-                        document.getElementById('missing').innerHTML += JSON.stringify(json[j]) + '\n\n';
+                        document.getElementById('missing').innerHTML += JSON.stringify(json[j]) + '<br/><br/>';
                     }
                 }
             }
@@ -97,16 +73,16 @@ DataBase=<span id="countDatabase"></span><br/>
                         first = false;
                         html += '"' + key2 + '":"' + json[j][key2] + '"';
                     } else {
-                        html += ',\n"' + key2 + '":"' + json[j][key2] + '"';
+                        html += ',<br/>"' + key2 + '":"' + json[j][key2] + '"';
                     }
                 }
             }
 
-            if (j < json.length - 1) html += '\n' + '},{' + '\n';
-            else html += '\n' + '}]';
+            if (j < json.length - 1) html += '<br/>' + '},{' + '<br/>';
+            else html += '<br/>' + '}]';
         }
 
-        $('#output').val(html);
+        document.getElementById('output').innerHTML = html;
 
         alreadyRun = true;
 
@@ -132,11 +108,11 @@ DataBase=<span id="countDatabase"></span><br/>
                                     first = false;
                                     html += '"' + key2 + '":"' + json[j][key2] + '"';
                                 } else {
-                                    html += ',\n"' + key2 + '":"' + json[j][key2] + '"';
+                                    html += ',<br/>"' + key2 + '":"' + json[j][key2] + '"';
                                 }
                             }
                         }
-                        html += '\n' + '},{' + '\n';
+                        html += '<br/>' + '},{' + '<br/>';
                     }
                 }
             }
@@ -184,7 +160,7 @@ DataBase=<span id="countDatabase"></span><br/>
                         break;
                     }
                     if (j == json.length - 1) {
-                        document.getElementById('missing').innerHTML += JSON.stringify(DataBase[key]) + '\n\n';
+                        document.getElementById('missing').innerHTML += JSON.stringify(DataBase[key]) + '<br/><br/>';
                     }
                 }
                 html += 'this.DataBase["' + name + '"][' + key + '] = {';
@@ -210,15 +186,58 @@ DataBase=<span id="countDatabase"></span><br/>
             }
         }
 
-//        var output = document.getElementById('output');
-//        output.textContent = html;
-//        output.innerHTML = output.innerHTML.replace(/\n\r?/g, '<br />');
-
-        $('#output').val(html);
+        var output = document.getElementById('output');
+        output.textContent = html;
+        output.innerHTML = output.innerHTML.replace(/\n\r?/g, '<br />');
 
         alreadyRun = true;
     }
+}
+////////////////////////////////////////////////////////////
 
-</script>
-</body>
-</html>
+var config = require('./config'),
+    dirPath = config.dirPath,
+    extension = config.extension,
+    util = require('util');
+
+var app = require('express')();
+var http = require('http').Server(app);
+app.get = app.get || 'webStorm sucked';
+app.get('/', function (req, res) {
+    res.sendfile('./fromXml/index.html');
+});
+app.get('/jquery-1.10.2.js', function (req, res) {
+    res.sendfile('fromXml/jquery-1.10.2.js');
+});
+http.listen(3000, function () {
+    console.log('listening on *:3000');
+});
+
+var fs = require('fs');
+var io = require('socket.io')(http);
+var chineseFiles = [],
+    wordCount = 0,
+    string = '',
+    characterCount = 0,
+    fileCount = 0;
+
+var fileWalk = require('./fileWalk'),
+    walkFile = fileWalk._walk,
+    readFile = fileWalk.readFile;
+
+var PropsConfig = require('./PropConfig');
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+io.on = io.on || 'webStorm sucked';
+io.on('connection', function (socket) {
+//    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
+    socket.on('get chinese', function(){
+
+        createFile("D:\\json\\json" + fileCount + ".txt", string);
+
+    });
+});
+
+initialize();
