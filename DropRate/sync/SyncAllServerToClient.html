@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+json=<span id="countJson"></span><br/>
+DataBase=<span id="countDatabase"></span><br/>
+<input type="button" value="output swf" onclick="outputSwf()">
+<input type="button" value="output json except name" onclick="outputJson(true)">
+<input type="button" value="output json compare all" onclick="outputJson(false)">
+<br/>
+<span id="new"></span>
+<br/>
+<span id="missing"></span>
+<br/>
+<textarea style="width:100%;height:100%" id="output">output</textarea>
+
+<script src="jquery-1.10.2.js"></script>
+<!--<script src="PropConfig.js"></script>-->
+<!--<script src="MallConfig.js"></script>-->
+<!--<script src="AchieveConfig.js"></script>-->
+<script src="ShenZhuConfig.js"></script>
+
+<script>
+
+    // config begin
+    var DatabasePrototypeId = 1;
+    // config end
+
+    var lastKey;
+
+    function printJsonAndDataBaseLength() {
+        var countDataBase = 0;
+
+        for (var key in DataBase) {
+            if (DataBase.hasOwnProperty(key)) {
+                countDataBase++;
+
+                lastKey = key;
+            }
+        }
+        document.getElementById('countJson').innerHTML += json.length;
+        document.getElementById('countDatabase').innerHTML += countDataBase;
+        console.log('last DataBase key: ' + lastKey);
+    }
+    printJsonAndDataBaseLength();
+
+    var alreadyRun = false;
+
+    function a() {var lastId = 0;
+
+        json.forEach(function eachJsonObject(jsonObject) {
+
+            var existed = false;
+
+            for (var key in DataBase) {
+                if (DataBase.hasOwnProperty(key)) {
+
+                    // == instead of === because DataBase.id is number and json.id is string
+                    if(DataBase[key].id == jsonObject.id) {
+
+                        existed = true;
+                        break;
+
+                    }
+
+                }
+            }
+
+            if(!existed) {
+
+                // this code change every DataBase that have changed
+                // before into the same exact value, but leave the existed
+//                DataBase[jsonObject.id] = DataBase[DatabasePrototypeId];
+//
+//                for (var property in DataBase[jsonObject.id]) {
+//                    if (DataBase[jsonObject.id].hasOwnProperty(property)) {
+//
+//                        if( isNumber( DataBase[jsonObject.id][property] ) ) {
+//
+//                            DataBase[jsonObject.id][property] = +jsonObject[property];
+//
+//                        } else {// A MORE SIMPLE WAY IS PRINT RIGHT HERE
+//
+//                            DataBase[jsonObject.id][property] = jsonObject[property];
+//
+//                        }
+//                        if(DataBase[jsonObject.id].id === DataBase[lastId].id){
+//                            console.log();
+//                        }
+//
+//                    }
+//                }
+
+                // this code assume DataBase and json have the same exact properties
+                DataBase[jsonObject.id] = {};
+
+                for (var property in jsonObject) {
+                    if (jsonObject.hasOwnProperty(property)) {
+
+                        // this code assume all properties are number
+                        DataBase[jsonObject.id][property] = +jsonObject[property];
+
+                    }
+                }
+
+            }lastId = jsonObject.id;
+
+        });     console.log(DataBase[5382]);
+
+        var output = '';
+
+        //this.DataBase["ShenZhuConfig"][1] = {id:1, equipId:101404, newEquipId:1101404, ruleType:1, bindSilver:0, silver:20.6653, rate:1000, fullRate:1000, costProps:32023, costAmount:20};
+        for (var key in DataBase) {
+            if (DataBase.hasOwnProperty(key)) {
+
+                var firstProperty = true;
+
+                output += 'this.DataBase["' + name + '"][' + key + '] = {';
+
+                for (var property in DataBase[key]) {
+                    if (DataBase[key].hasOwnProperty(property)) {
+
+                        if(firstProperty){
+                            firstProperty = false;
+                        } else {
+                            output += ', ';
+                        }
+
+                        output += property + ':';
+
+                        if( isNumber( DataBase[key][property] ) ) {
+
+                            output += DataBase[key][property];
+
+                        } else {
+
+                            output += '"' + DataBase[key][property] + '"';
+
+                        }
+
+                    }
+                }
+
+                output += '};\n';
+
+            }
+        }
+
+        $('#output').val(output);
+
+    }
+    a();
+
+    function isNumber(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
+</script>
+</body>
+</html>

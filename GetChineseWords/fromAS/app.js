@@ -107,7 +107,7 @@ io.on('connection', function (socket) {
 //    io.emit('chat message', { chineseFiles: JSON.stringify(chineseFiles, undefined, 2) });
     socket.on('get chinese', function(){
 
-        createFile("D:\\temp\\as.txt", allChineseString);
+        createFile(config.savePath, allChineseString);
     });
 });
 

@@ -58,7 +58,7 @@ var replaceChineseWithVietnamese = require('./replaceChineseWithVietnamese').rep
 
 var app = require('express')();
 var http = require('http').Server(app);
-app.get = app.get || 'webStorm sucked';
+app.get = app.get || 'webStorm sucked'; // var app.get
 app.get('/', function (req, res) {
     res.sendfile('./fromXml/index.html');
 });

@@ -1,6 +1,6 @@
 //exports.dirPath = 'D:\\temp\\SWF_to_FLA';
 
-exports.dirPath = 'D:\\temp\\sql_can_dich';
+exports.dirPath = 'E:\\temp\\Game';
 
-exports.savePath = 'D:\\temp\\as.txt';
-exports.asOrSql = 'sql';
+exports.savePath = 'E:\\temp\\as.txt';
+exports.asOrSql = 'as';
